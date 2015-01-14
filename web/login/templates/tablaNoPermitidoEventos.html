@@ -1,0 +1,32 @@
+{% include 'base2.html' %}
+ 
+<table  class="table table-hover table-bordered">
+<thead>
+<tr>
+<th><center>Clave</center></th>
+<th><center>Fecha y Hora</center></th>
+<th><center>Lugar</center></th>
+
+</tr>
+</thead>
+<tbody>
+	
+{% for evento in eventos %}
+
+<tr>
+
+<td align='center'><h5>{{ evento.clave_eventos_no_permitido }}</h5></td>
+<td align='center'><h5>{{ evento.fechayhora_eventos_no_permitido }}</h5></td>
+<td align='center'><h5>{{ evento.lugar_eventos_no_permitido }}</h5></td>
+<td><a href="/showphoto">Ver Foto</a><br/></td>
+
+{% endfor %}
+</tbody>
+</table>
+<form action="/tablaNoPermitidoEventos" method="post">{% csrf_token %}
+	<center><button type="submit" class="standar">Ver mas</button></center>
+</form>
+
+<a href="/tablaEventos">
+<center><button type="submit" class="standar">Volver</button></center></a>
+

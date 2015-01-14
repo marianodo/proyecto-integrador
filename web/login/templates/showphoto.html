@@ -1,0 +1,56 @@
+{% include 'base2.html' %}
+<html>
+    <head>
+        <title>bootstrap datepicker examples</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <!-- Bootstrap CSS and bootstrap datepicker CSS used for styling the demo pages
+        <link rel="stylesheet" href="/static/css/datepicker.css">
+        <link rel="stylesheet" href="/static/css/bootstrap.css">-->
+    </head>
+    <body>
+        <form action="/showphoto" method="post">{% csrf_token %}
+        <div class="container">
+            <div class="hero-unit">
+            <i>Seleccione un día: </i> <input  type="text" placeholder="DD-MM-YYYY" name="from"  id="example1">
+            <button type="submit" class="standar">Cargar</button>
+            </div>
+        </div>
+        <!-- Load jQuery and bootstrap datepicker scripts -->
+        <script src="/static/js/jquery-1.9.1.min.js"></script>
+        <script src="/static/js/bootstrap-datepicker.js"></script>
+        
+            <script type="text/javascript">
+                // When the document is ready
+                $(document).ready(function () {
+                    
+                    $('#example1').datepicker({
+                        format: "dd-mm-yyyy"
+                    });  
+                
+                });
+            </script>
+    
+         
+        </form>
+    
+     {% for photo in photos%}    
+   
+  <div class="col-sm-1 col-md-2">
+    <a href="/static/photo/{{photo}}" class="thumbnail">
+      
+       <img width=100 height=100  src="/static/photo/{{photo}}" class="img-rectangle"> 
+    <div class="caption">
+        <p>{{photo}}</p>
+    </div>
+    </a>
+  </div>
+
+      {%endfor%}
+</html>
+
+ 
+
+
+
+
+

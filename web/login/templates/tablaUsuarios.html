@@ -1,0 +1,54 @@
+{% include 'base2.html' %}
+<html>
+<head>
+
+</head> 
+<body>
+<table  class="table table-hover table-bordered">
+<thead>
+<tr>
+    <th><center>Nombres</center></th>
+    <th><center>Apellidos</center></th>
+    <th><center>DNI</center></th>
+    <th><center>Telefono</center></th>
+    <th><center>Direccion</center></th>
+    <th><center>Localidad</center></th>
+    <th><center>Email</center></th>
+    <th><center>Clave</center></th>
+    <th><center>Estado</center></th>
+    <th><center>Tarjeta</center></th>
+    <th><center>Fecha Alta</center></th>
+    <th><center>Categoria</center></th>
+    <th><center>Acciones</center></th>
+
+</tr>
+</thead>
+<tbody>
+{% for usuario in usuarios %}
+<tr>
+    <td align='center'><h6>{{ usuario.nombres_usuario }}</h6></td>
+    <td align='center'><h6>{{ usuario.apellidos_usuario }}</h6></td>
+    <td align='center'><h6>{{ usuario.dni_usuario }}</h6></td>
+    <td align='center'><h6>{{ usuario.telefono_usuario }}</h6></td>
+    <td align='center'><h6>{{ usuario.direccion_usuario }}</h6></td>
+    <td align='center'><h6>{{ usuario.localidad_usuario }}</h6></td>
+    <td align='center'><h6>{{ usuario.email_usuario }}</h6></td>
+    <td align='center'><h6>{{ usuario.clave_usuario }}</h6></td>
+    <td align='center'><h6>{{ usuario.estado_usuario }}</h6></td>
+    <td align='center'><h6>{{ usuario.tarjeta_usuario }}</h6></td>
+    <td align='center'><h6>{{ usuario.fecha_alta_usuario }}</h6></td>
+    <td align='center'><h6>{{ usuario.categoria_usuario.identificacion_personal }}</h6></td>
+    <td><a href="/editarUsuario/{{usuario.id}}">Editar</a><br/><a href="/borrar/{{usuario.id}}" onClick="return confirm('¿Desea borrar el registro?')" >Eliminar</a></td>
+</tr>
+
+{% empty %}
+<tr><td colspan="4">No hay usuarios registrados</td></tr>
+{% endfor %}
+</tbody>
+</table>
+
+<form action="/export/usuarios" method="post">{% csrf_token %}
+    <center><button type="submit" class="standar">Exportar a Excel</button></center>
+</form>
+</body>
+</html>

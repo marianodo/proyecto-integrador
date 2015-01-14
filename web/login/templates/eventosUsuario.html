@@ -1,0 +1,23 @@
+{% include 'base2.html' %}
+ 
+<table  class="table table-hover table-bordered">
+<thead>
+<tr>
+<th><center>Nombre</center></th>
+<th><center>Apellido</center></th>
+<th><center>Fecha y Hora</center></th>
+<th><center>Lugar</center></th>
+
+</tr>
+</thead>
+<tbody>
+{% for usuario in usuarios %}
+<tr>
+<td align='center'><h5>{{ usuario.nombres_eventos }}</h5></td>
+<td align='center'><h5>{{ usuario.apellidos_eventos }}</h5></td>
+<td align='center'><h5>{{ usuario.fechayhora_eventos }}</h5></td>
+<td align='center'><h>{{ usuario.lugar_eventos }}</h5></td>
+
+{% endfor %}
+</tbody>
+</table>

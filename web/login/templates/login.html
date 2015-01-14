@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+        {% block contento %}
+
+    {% if user.is_active %}
+        <script language="JavaScript" type="text/javascript">
+
+            window.location="/home";
+
+        </script>
+    {% endif %}
+
+            <form class="navbar-form navbar-right" action="{% url 'django.contrib.auth.views.login' %}" method="post" accept-charset="utf-8">
+                 {% csrf_token %}
+                <div class="form-group">
+                    <input class="form-control" type="text" placeholder="Username" name="username">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="password" placeholder="Password" name="password">
+                </div>
+                {% csrf_token %}
+                <button type="submit" class="btn btn-default">Login</button>
+            </form>
+        {% endblock %}
+ 
+   {% block inicio %}
+   
+   <p><h1>Control de Acceso</h1></p>
+   <h1>Laboratorio de Arquitectura de Computadoras</h1>
+
+    <img src="/static/media/unc.jpg" alt="logo" style="margin-center:-1000px; position:center;">
+{% endblock %}
+    
+ 

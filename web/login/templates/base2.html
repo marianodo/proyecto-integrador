@@ -1,0 +1,137 @@
+{% load static %}
+{% autoescape off %}
+<link rel='shortcut icon' href="/static/img/huella.jpg">
+<head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Control Acceso - {% block title %}{% endblock %}</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+
+        <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}">
+        <style>
+            body {
+                padding-top: 5%;
+                
+            }
+        </style>
+        <link rel="stylesheet" href="{% static "css/bootstrap-theme.min.css" %}">
+        <link rel="stylesheet" href="{% static "css/main.css" %}">
+        <script type="text/javascript" src="static/js/jquery.min.js" ></script>
+        <script type="text/javascript" src="static/js/jquery.blockUI.js" ></script>
+        <script type="text/javascript" src="static/js/bootstrap.js"></script>
+        <script type="text/javascript" src="static/js/bootbox.min.js"></script>
+        <script type="text/javascript" src="static/js/spin.min.js"></script>
+        <script src="{% static "js/vendor/modernizr-2.6.2-respond-1.1.0.min.js" %}"></script>
+    </head>
+
+    <body>
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        
+      <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Control Acceso LAC</a>
+             </div>
+
+    <!-- <ul class="nav navbar-nav navbar-center" style="margin-left:50%;margin-top:1%">
+        <a href="/agregarUsuario">
+            <button type="button" class="btn btn-default" title="Agregar Usuario">
+                <span class="glyphicon glyphicon-plus"></span>
+            </button>
+        </a>
+    </ul> -->
+    <ul class="nav navbar-nav navbar-right" style="margin-top:1%">
+          <div class="btn-group">
+            <a href="{% url 'home' %}">
+            <button type="button" class="btn btn-default" title="Inicio">
+                <span class="glyphicon glyphicon-home"></span>
+            </button>
+            <!-- </a>
+            <a href="{% url 'tablaUsuarios' %}">
+            <button type="button" class="btn btn-default" title="Ver Usuarios">
+                <span class="glyphicon glyphicon-user"></span>
+            </button>
+            </a> -->
+            <a href="{% url 'tablaEventos' %}">
+            <button type="button" class="btn btn-default" title="Ver Eventos">
+                <span class="glyphicon glyphicon-list"></span>
+            </button>
+            </a>
+            <a href="/tablaWebEventos">
+            <button type="button" class="btn btn-default" title="Ver Eventos Web">
+                <span class="glyphicon glyphicon-globe"></span>
+            </button>
+            </a>
+            <a href="{% url 'showphoto' %}">
+            <button type="button" class="btn btn-default" title="Ver Imagenes">
+                <span class="glyphicon glyphicon-picture"></span>
+            </button>
+            </a>
+            
+
+<span class="dropdown">
+    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+
+                 <span><span class="glyphicon glyphicon-chevron-down "></span></span>
+    </button>
+      <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="/agregarUsuario">Agregar Usuario</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'tablaUsuarios' %}">Ver Usuarios</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="/tablaFranjas">Administrar Franjas Horarias</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'ayuda' %}">Ayuda</a></li>
+        <li role="presentation" class="divider"></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'logout' %}">Logout</a></li>
+        
+        
+        
+      </ul>
+</span>
+
+            <!-- </a>
+            <a href="/tablaFranjas">
+            <button type="button" class="btn btn-default" title="Franjas Horarias">
+                <span class="glyphicon glyphicon-time"></span>
+            </button>
+            </a> -->
+            <!-- <a href="{% url 'ayuda' %}">
+            <button type="button" class="btn btn-default" title="Ayuda">
+                <span class="glyphicon glyphicon-question-sign"></span>
+            </button>
+            </a> -->
+            <!-- <a href="{% url 'logout' %}">
+            <button type="button" class="btn btn-default" title="Logout">
+                <span class="glyphicon glyphicon-off"></span>
+            </button>
+            </a> -->
+            
+            
+          </div>
+          
+        
+    </ul>
+
+ 
+              
+            </div>
+            <div class="navbar-collapse collapse">
+                
+    
+ 
+                 {% block contento %} {% endblock %}
+
+                
+            </div><!--/.navbar-collapse -->
+      </div>
+    </div>
+
+ <p><div class="container" align="middle"> </p>
+
+{% block inicio %}
+{% endblock %}
+
+</div>
+{% block content %}
+{% endblock %}
+{% block content2 %}
+{% endblock %}
+{% endautoescape %}

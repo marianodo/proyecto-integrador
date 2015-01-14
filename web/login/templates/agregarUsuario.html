@@ -1,0 +1,89 @@
+{% include "base2.html" %}
+<html>
+<head>
+<script>
+    function validacion(form) {
+        var documento = form.dni.value
+        var phone = form.telefono.value
+        var checkIntDocumento = documento % 1
+        var checkIntPhone = phone % 1
+        
+        if (checkIntDocumento != 0 || documento.length < 5){
+        alert('Formato incorrecto en campo DNI. Complete nuevamente');
+        return false;
+        }
+
+        if (checkIntPhone != 0){
+        alert('Formato incorrecto en campo Telefono. Complete nuevamente');
+        return false;
+        }
+       
+        return true;
+    }
+</script>
+</head>
+<body>
+
+
+
+<table >
+<th>    
+
+<div >
+<form action="/agregarUsuario" method="POST" onsubmit="return validacion(this)">{% csrf_token %}
+<table  align="center">
+
+<tr><td>Nombre</td><td>  <input type="text"  name="nombre"></td></tr>
+<tr><td>Apellido</td><td>  <input   type="text"  name="apellido"></td></tr>
+<tr><td>DNI</td><td>  <input  align="right"  type="text"  name="dni"></td></tr>
+<tr><td>Telefono</td><td>  <input   type="text"  name="telefono"></td></tr>
+<tr><td>Direccion</td><td>  <input   type="text"  name="direccion"></td></tr>
+<tr><td>Localidad</td><td>  <input   type="text"  name="localidad"></td></tr>
+<tr><td>Email</td><td>  <input   type="text"  name="email"></td></tr>
+<tr><td>Clave</td><td> <input   type="text"  name="clave" id="clave" value={{clave}}></td></tr>
+<tr><td>Estado</td><td>  <select name="estado">
+<option value="ACTIVO">ACTIVO</option>
+<option value="INACTIVO">INACTIVO</option>
+</td></tr>
+<tr><td>Tarjeta</td><td>  <select name="tarjeta">
+<option value="TARJETA">TARJETA</option>
+<option value="LLAVERO">LLAVERO</option>
+</td></tr>
+<tr><td>Categoria</td><td> <select id="cmbPersonal" name="categoria" style="background-color:#F2F2F2;color:#1C1C1C;">
+   {% for identPersonal in identPersonals %} 
+        {% if identPersonal.id == namePersonal.id %}
+        <option value={{identPersonal.id}} selected> {{identPersonal.identificacion_personal}} </option>
+        {% else %}
+    <option value={{identPersonal.id}} > {{identPersonal.identificacion_personal}} </option>
+    {% endif%}
+    {% endfor %}
+</select>
+
+
+</table>
+<p align="center"><input type="submit" value="Grabar" style="margin-top:10px"></p>
+
+</form>
+</div>
+</th>
+
+<th valign="center"  >
+   <a href="/capturar">
+        <input type="submit" value="Capturar Clave" class="btn btn-default" title="Logout">
+    </a>
+
+</th>
+
+<tr>
+<td colspan="2" >
+     <center><FONT FACE="arial" SIZE=3 COLOR=grey align="center" >Para capturar la clave presione el botón "Capturar Clave" y luego pase el llavero por el lector. Si se capturó correctamente, el código deberá aparecer en la casilla de texto CLAVE
+<span><p><p>NOTA: Usted dispondrá de 10 segundos entre presionar el botón "Capturar" y pasar la tarjeta por el lector.</span></p></p></font></center>
+</td>
+</tr>
+
+
+
+
+
+</body>
+</html>

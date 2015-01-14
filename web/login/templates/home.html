@@ -1,0 +1,122 @@
+{% include 'base2.html' %}
+ 
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Pagina de Inicio</title>
+
+
+
+<script languaje="javascript">
+
+function deshabilita()
+
+{
+    
+document.getElementById("abrirpuerta").style.background="#F2F2F2"; 
+document.getElementById("abrirpuerta").style.color="#1C1C1C"; 
+document.getElementById("abrirpuerta").disabled=true;
+
+}
+</script>
+
+<script language="javascript">
+
+function mostrarCartel()
+{
+    var contenedor=document.getElementById("cartelPuerta");
+    contenedor.style.display="block";
+}
+</script>
+<script language="Javascript">
+function cartel() {
+	alert("Existe una llamada en curso. Porfavor corte la comunicacion para Abrir Puerta")
+	window.location = "/home";
+}
+</script>
+
+
+<!--<a href="popup.html" onclick="abrir(this.href);return false">Abrir Ventana</a> -->
+ 
+ 
+
+<script type="text/javascript" src="static/js/janus.js" ></script>
+<script type="text/javascript" src="static/js/siptest.js"></script>
+<!--<link rel="stylesheet" href="/static/css/cerulean/bootstrap.css" type="text/css"/>
+<link rel="stylesheet" href="/static/css/demo.css" type="text/css"/>
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css"/>
+# -->
+
+	{% if flag %}
+		<body >
+			<script>
+				cartel();
+			</script>
+	{% else %}
+	<body>
+	{% endif %}
+
+<form action="/openDoor" method="post" >{% csrf_token %}
+    <center><input type="submit" name="open" id="abrirpuerta" value="Abrir Puerta" class="btn btn-default" style="background:#01DF74"></center>
+</form>
+<div style="display:none" id="cartelPuerta"><center><i>Para abrir puerta por favor corte la comunicación</i></center></div>
+ 
+<!-- <form action="/home" method="post"  >{% csrf_token %} -->
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			
+			<center><img  src="http://192.168.1.50:8081"></center>
+			<p><center><button name="callpage" class="btn btn-default" id="start" onclick="deshabilita()">Llamar</button></center></p>
+			
+
+    <img src="/static/img/user.jpg" alt="logo"  align="baseline"><a style="margin-left:10px"><FONT FACE="arial" SIZE=5 COLOR=grey >{{user.username}}</FONT></a>
+<!--style="margin-left:50px;margin-top:50px; position:left"-->
+    
+    
+			<div class="container hide" id="sipcall">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="col-md-6 container hide" id="login">
+							
+							<button class="btn btn-success margin-bottom-sm hide" id="register">Register</button>  
+						</div>
+						<div class="col-md-6 container hide" id="phone">
+							<div class="input-group margin-bottom-sm hide">
+								<span class="input-group-addon"><i class="fa fa-phone fa-fw"></i></span>
+								<input class="form-control" type="text" placeholder="SIP URI to call (e.g., sip:1000@example.com)" id="peer" onkeypress="return checkEnter(this, event);"></input>
+							</div>
+							
+						</div>
+					</div>
+				<div/>
+				<div id="videos" class="hide">
+					<div class="col-md-6 ">
+						<div class="panel panel-default hide">
+							<div class="panel-heading ">
+								<h3 class="panel-title ">You</h3>
+							</div>
+							<div class="panel-body hide" id="videoleft"></div>
+						</div>
+					</div>
+					<div class="col-md-6 ">
+						<div class="panel panel-default hide">
+							<div class="panel-heading ">
+								<h3 class="panel-title hide">Remote UA</h3>
+							</div>
+							<div class="panel-body hide" id="videoright"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+</div>
+<!-- </form> -->
+</body>
+</html>

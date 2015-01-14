@@ -1,0 +1,37 @@
+
+{% include "base2.html" %}
+ <html>
+ <head>
+ </head>
+ <body>
+
+<table align="center" style="margin-top:-220px;margin-left:20px">
+	<form method="POST">{% csrf_token %}
+
+<tr><td><i> Nombres: </td><td><input type="text" name="nombre" value={{formularios.nombres_usuario}}></i></td></tr><br>
+<tr><td><i> Apellidos: </td><td><input type="text" name="apellido" value={{formularios.apellidos_usuario}}></i></td></tr><br>
+<tr><td><i> DNI: </td><td><input type="text" name="dni" value={{formularios.dni_usuario}}></i></td></tr><br>
+<tr><td><i> Telefono: </td><td><input type="text" name="telefono" value={{formularios.telefono_usuario}}></i></td></tr><br>
+<tr><td><i> Direccion: </td><td><input type="text" name="direccion" value={{formularios.direccion_usuario}}></i></td></tr><br>
+<tr><td><i> Localidad: </td><td><input type="text" name="localidad" value={{formularios.localidad_usuario}}></i></td></tr><br>
+<tr><td><i> Email: </td><td><input type="text" name="email" value={{formularios.email_usuario}}></i></td></tr><br>
+<tr><td><i> Clave: </td><td><input type="text" name="clave" value={{formularios.clave_usuario}}></i></td></tr><br>
+<tr><td><i> Estado: </td><td><input type="text" name="estado" value={{formularios.estado_usuario}}></i></td></tr><br>
+<tr><td><i> Tarjeta: </td><td><input type="text" name="tarjeta" value={{formularios.tarjeta_usuario}}></i></td></tr><br>
+<tr><td><i> Categoria: </td><td><select id="cmbPersonal" name="categoria" style="background-color:#F2F2F2;color:#1C1C1C;">
+   {% for identPersonal in identPersonals %} 
+        {% if identPersonal.id == namePersonal.id %}
+        <option value={{identPersonal.id}} selected> {{identPersonal.identificacion_personal}} </option>
+        {% else %}
+    <option value={{identPersonal.id}} > {{identPersonal.identificacion_personal}} </option>
+    {% endif%}
+    {% endfor %}
+</select></i></td></tr><br>
+
+<tr><td><input type="submit" value="Editar" /></td></tr>
+
+</form>
+</table>
+
+</body>
+</html>

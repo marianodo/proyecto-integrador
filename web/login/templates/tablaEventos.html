@@ -1,0 +1,164 @@
+{% include 'base2.html' %}
+<head>
+<!-- Bootstrap CSS and bootstrap datepicker CSS used for styling the demo pages
+        <link rel="stylesheet" href="/static/css/datepicker.css">
+        <link rel="stylesheet" href="/static/css/bootstrap.css">-->
+
+</head>
+<body>
+    <script src="/static/js/jquery-1.9.1.min.js"></script>
+        <script src="/static/js/bootstrap-datepicker.js"></script>
+        
+            <script type="text/javascript">
+                // When the document is ready
+                $(document).ready(function () {
+                    
+                    $('#example1').datepicker({
+                        format: "dd-mm-yyyy"
+                    });  
+                
+                });
+            </script>
+    <script languaje="javascript">
+
+function habilita(form)
+
+{
+    
+document.getElementById("exportar").style.background="#F2F2F2"; 
+document.getElementById("exportar").style.color="#1C1C1C"; 
+document.getElementById("exportar").disabled=false;
+document.getElementById("cant").style.background="#F2F2F2"; 
+document.getElementById("cant").style.color="#1C1C1C"; 
+document.getElementById("cant").disabled=false; 
+
+document.getElementById("exportar2").style.background="#D8D8D8"; 
+document.getElementById("exportar2").style.color="#BDBDBD"; 
+document.getElementById("exportar2").disabled=true; 
+document.getElementById("cant2").style.background="#D8D8D8"; 
+document.getElementById("cant2").style.color="#BDBDBD"; 
+document.getElementById("cant2").disabled=true; 
+}
+
+function deshabilita(form)
+{
+
+document.getElementById("exportar").style.background="#D8D8D8"; 
+document.getElementById("exportar").style.color="#BDBDBD"; 
+document.getElementById("exportar").disabled=true; 
+document.getElementById("cant").style.background="#D8D8D8"; 
+document.getElementById("cant").style.color="#BDBDBD"; 
+document.getElementById("cant").disabled=true; 
+
+
+
+document.getElementById("exportar2").style.background="#F2F2F2"; 
+document.getElementById("exportar2").style.color="#1C1C1C"; 
+document.getElementById("exportar2").disabled=false;
+document.getElementById("cant2").style.background="#F2F2F2"; 
+document.getElementById("cant2").style.color="#1C1C1C"; 
+document.getElementById("cant2").disabled=false; 
+}
+</script>
+
+<script type="text/javascript">
+                // When the document is ready
+                $(document).ready(function () {
+                    
+                    $('#cant2').datepicker({
+                        format: "yyyy-mm-dd"
+                    });  
+                
+                });
+            </script> 
+
+            <script language="Javascript">  
+function mostrar(nombreCapa){  
+document.getElementById(nombreCapa).style.visibility="visible";  
+}  
+function ocultar(nombreCapa){  
+document.getElementById(nombreCapa).style.visibility="hidden";  
+}  
+</script> <div style="display:none" id="capa2"><center><img align="center" src="/static/img/cargando2.gif"></center></div>
+
+<table  class="table table-hover table-bordered">
+<thead>
+<tr>
+<th><center>Nombre</center></th>
+<th><center>Apellido</center></th>
+<th><center>Fecha y Hora</center></th>
+<th><center>Lugar</center></th>
+
+</tr>
+</thead>
+<tbody>
+	
+{% for usuario in usuarios %}
+
+<tr>
+<td align='center'><h5>{{ usuario.nombres_eventos }}</h5></td>
+<td align='center'><h5>{{ usuario.apellidos_eventos }}</h5></td>
+<td align='center'><h5>{{ usuario.fechayhora_eventos }}</h5></td>
+<td align='center'><h5>{{ usuario.lugar_eventos }}</h5></td>
+<td><a href="/eventosUsuario/{{usuario.id_usuario_eventos}}">Ver Eventos</a><br/>
+<a href="/showphoto">Ver Foto</a><br/>
+</td>
+
+{% endfor %}
+</tbody>
+</table>
+<form action="/tablaEventos" method="post">{% csrf_token %}
+	<center><button type="submit" class="standar">Ver mas</button></center>
+</form>
+<form action="/tablaNoPermitidoEventos" >{% csrf_token %}
+	<button type="submit" class="standar">Ver intentos de acceso fallidos</button>
+</form>
+
+
+<div class="panel panel-default">
+    &nbsp;&nbsp;
+    <input type="radio" name="boletin" value="si" checked onClick="habilita(cant)"> Exportar por Cantidad 
+  <input type="radio" name="boletin" value="no" onClick="deshabilita(cant2)"> Exportar por día
+  <div class="panel-body">
+    <table class="table" width="50%">
+        <tr>
+            <td>
+                <form  action="/export/eventos" method="post">{% csrf_token %}
+                    <select id="cant" name="cantidad" style="background-color:#F2F2F2;color:#1C1C1C;">
+                        <option name=uno value=100 selected> Últimos 100 datos </option>
+                        <option name=dos value=200> Últimos 200 datos </option>
+                        <option name=tres value=500> Últimos 500 datos </option>
+                        <option name=cuatro value=1000> Últimos 1000 datos </option>
+                        <option name=cinco value=2000> Todos </option>
+                        
+                    </select>
+            </td>
+            <td>
+
+                    <button  style="background-color: #F2F2F2;color:#1C1C1C;" id="exportar" name="exportar" backgroundtype="submit" class="standar">Exportar</button>
+                </form>
+            </td>
+            
+            <td>
+                <div class="container">
+                    <div class="hero-unit">
+                        <form  action="/export/eventosFecha" method="post">{% csrf_token %}
+                            <lable id ="cant3"><i>Seleccione un día: </i> </label><input id="cant2" style="background-color:#D8D8D8;color:#BDBDBD;" type="text" placeholder="DD-MM-YYYY" name="cantidad" disabled>
+
+                            <button style="background-color: #D8D8D8;color:#BDBDBD;" id="exportar2" type="submit" name="exportar2" class="standar" disabled>Exportar</button>
+                        </form>
+                    </div>
+                </div>
+            </td>
+            <td>
+            </td>
+        </tr>
+</table>
+  </div>
+  
+</div>
+
+
+
+
+</body>

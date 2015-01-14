@@ -1,0 +1,27 @@
+{% include 'base2.html' %}
+ 
+<table  class="table table-hover table-bordered">
+<thead>
+<tr>
+<th><center>Usuario</center></th>
+<th><center>Via</center></th>
+<th><center>Fecha y Hora</center></th>
+<th><center>Lugar</center></th>
+
+</tr>
+</thead>
+<tbody>
+{% for usuario in usuariosWeb %}
+<tr>
+<td align='center'><h5>{{ usuario.nombres_eventos_web }}</h5></td>
+<td align='center'><h5>{{ usuario.via_eventos_web }}</h5></td>
+<td align='center'><h5>{{ usuario.fechayhora_eventos_web }}</h5></td>
+<td align='center'><h>{{ usuario.lugar_eventos_web }}</h5></td>
+<td><a href="/eventosUsuarioWeb/{{usuario.id_usuario_eventos_web}}">Ver Eventos Web</a><br/></td>
+
+{% endfor %}
+
+</tbody>
+</table>
+<form action="/tablaWebEventos" method="post">{% csrf_token %}
+<center><button type="submit" class="standar">Ver mas</button></center></form>

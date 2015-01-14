@@ -1,0 +1,22 @@
+
+{% include "base2.html" %}
+
+
+<form action"/editarFranja" method="POST">{% csrf_token %}
+
+
+
+
+
+<i> Hora desde: <input type="text" name="desdeFranjas" value={{formularios.desde_franjas}}></i><br>
+<i> Hora Hasta: <input type="text" name="hastaFranjas" value={{formularios.hasta_franjas}}></i><br>
+
+
+
+
+
+
+<input type="submit" value="Editar" />
+
+</form>
+

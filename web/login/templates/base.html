@@ -1,0 +1,58 @@
+{% load static %}
+{% autoescape off %}
+
+<head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Control Acceso LAC - {% block title %}{% endblock %}</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+
+        <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}">
+        <style>
+            body {
+                padding-top: 5%;
+                padding-bottom: 2%;
+            }
+        </style>
+        <link rel="stylesheet" href="{% static "css/bootstrap-theme.min.css" %}">
+        <link rel="stylesheet" href="{% static "css/main.css" %}">
+
+        <script src="{% static "js/vendor/modernizr-2.6.2-respond-1.1.0.min.js" %}"></script>
+    </head>
+
+
+    <body>
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+            <div class="navbar-header">
+             <!-- <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar">sds</span>
+                <span class="icon-bar">q</span>
+                <span class="icon-bar">qw</span> -->
+              </button>
+              <a class="navbar-brand" href="#">Control de acceso</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                
+    
+ 
+                 {% block contento %} {% endblock %}
+
+                
+            </div><!--/.navbar-collapse -->
+      </div>
+    </div>
+
+ <p><div class="container" align="middle"> </p>
+
+{% block inicio %}
+{% endblock %}
+
+</div>
+{% block content %}
+{% endblock %}
+{% block content2 %}
+{% endblock %}
+{% endautoescape %}

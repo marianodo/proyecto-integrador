@@ -1,0 +1,151 @@
+{% include 'base2.html' %}
+<html>
+<head>
+<script type="text/javascript">
+    function mostrar()
+    {
+        document.getElementById('franja').style.display = 'block';
+    }
+</script>
+<script>
+    function validacion(form) {
+        var horaDesde = form.desdeFranja.value
+        var DosPuntosDesde = horaDesde.split(":");
+        var antesDosPuntosDesde = DosPuntosDesde[0];
+        var despuesDosPuntosDesde = DosPuntosDesde[1];
+        var checkIntAntesDesde = antesDosPuntosDesde % 1 
+        var checkIntDespuesDesde = despuesDosPuntosDesde % 1 
+        
+        if (antesDosPuntosDesde.length != 2 || checkIntAntesDesde != 0 || antesDosPuntosDesde > 23){
+        alert('El valor "Hora Desde" debe tener el siguiente formato "HH:MM, ej: 08:30');
+        return false;
+        }
+        if (despuesDosPuntosDesde.length != 2 || checkIntDespuesDesde != 0 || despuesDosPuntosDesde > 59){
+        alert('El valor "Hora Desde" debe tener el siguiente formato "HH:MM, ej: 08:30  ');
+        return false;
+        }
+
+        var horaHasta = form.hastaFranja.value
+        var DosPuntosHasta = horaHasta.split(":");
+        var antesDosPuntosHasta = DosPuntosHasta[0];
+        var despuesDosPuntosHasta = DosPuntosHasta[1];
+        var checkIntAntesHasta = antesDosPuntosHasta % 1 
+        var checkIntDespuesHasta = despuesDosPuntosHasta % 1 
+        
+        if (antesDosPuntosHasta.length != 2 || checkIntAntesHasta != 0 || antesDosPuntosHasta > 23){
+        alert('El valor "Hora Hasta" debe tener el siguiente formato "HH:MM, ej: 08:30');
+        return false;
+        }
+        if (despuesDosPuntosHasta.length != 2 || checkIntDespuesHasta != 0 || despuesDosPuntosHasta > 59){
+        alert('El valor "Hora Hasta" debe tener el siguiente formato "HH:MM, ej: 08:30  ');
+        return false;
+        }
+        return true;
+}
+</script>
+
+</head>
+<body>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    
+        <i class="panel-title">Seleccione una Categoria</i>
+        <span align="right">
+        
+        </span>
+  </div>
+  <div class="panel-body">
+ <table>
+    <tr>
+	  
+        <td>
+        <form  action="/tablaFranjas" method="post">{% csrf_token %}
+            <select id="cmbPersonal" name="idPersonal" style="background-color:#F2F2F2;color:#1C1C1C;">
+               {% for identPersonal in identPersonals %} 
+                    {% if identPersonal.id == namePersonal.id %}
+                    <option value={{identPersonal.id}} selected> {{identPersonal.identificacion_personal}} </option>
+                    {% else %}
+                <option value={{identPersonal.id}} > {{identPersonal.identificacion_personal}} </option>
+                {% endif%}
+                {% endfor %}
+            </select>
+
+            <button  style="background-color: #F2F2F2;color:#1C1C1C;" id="exportar" name="exportar" backgroundtype="submit" class="standar">Ver</button>
+        </form>
+        </td>
+        <td>
+
+        </td>
+    </tr>
+    <tr>
+        <td style="margin-right:10px">
+        <a href="{% url 'agregarPersonal' %}">
+            <button type="button" class="btn btn-default" title="Agregar nuevo personal">
+                <span class="glyphicon glyphicon-plus"></span> 
+            </button>
+        </a><span class="panel-title" >Agregar Categoria</span></p>
+        </td></tr>
+</div>
+</div>
+<table  class="table table-hover table-bordered">
+<thead>
+    {% if namePersonal.id  %}
+    <tr>
+        <th colspan='4'> Categoría: <i>{{namePersonal.identificacion_personal}}</i> </th>
+    </tr>
+    
+<tr>
+
+
+<th><center>DIA</center></th>
+<th><center>DESDE</center></th>
+<th><center>HASTA</center></th>
+
+</tr>
+</thead>
+<tbody>
+	
+{% for franja in Franjas %}
+
+<tr>
+
+<td align='center'><h5>{{ franja.dia_franjas.nombre_dias }}</h5></td>
+<td align='center'><h5>{{ franja.desde_franjas }}</h5></td>
+<td align='center'><h5>{{ franja.hasta_franjas }}</h5></td>
+<td><a href="/editarFranja/{{franja.id}}">Editar</a><br/><a href="/borrarFranja/{{franja.id}}" onClick="return confirm('Se va a borrar. ¿Esta Seguro?')">Eliminar</a></td>
+</tr>
+
+
+
+{% endfor %}
+</table>
+<center><input type="button" value="Agregar Franja" onclick="mostrar()"></center>
+
+<div style="display:none;margin-left:5px;" id="franja">
+    <h4 > Agregar franja en categoría: {{namePersonal.identificacion_personal}}</h4>
+    <form action="/agregarFranja" name="datos" method="post" onsubmit="return validacion(this)">{% csrf_token %}
+        <br>
+        <p> ID: <input  type="text" size="1" name="idPersonal" value={{namePersonal.id}} ></p>
+        <p>Día: 
+        <select id="diaFranja" name="diaFranja" style="background-color:#F2F2F2;color:#1C1C1C;">
+            <option value=1>Lunes</option>
+            <option value=2>Martes</option>
+            <option value=3>Miercoles</option>
+            <option value=4>Jueves</option>
+            <option value=5>Viernes</option>
+            <option value=6>Sabado</option>
+            <option value=7>Domingo</option>
+        </select></p>
+       
+        <p> Hora Desde: 
+        <input  type="text" placeholder="HH:MM" name="desdeFranja"  ></p>
+        <p> Hora Hasta: <input  type="text" placeholder="HH:MM" name="hastaFranja"></p>
+        
+         <input style="margin-left:75px " type="submit" value="Agregar">
+    </form>
+    
+</div>
+{%endif%}
+
+</body>
+</html>

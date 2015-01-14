@@ -1,0 +1,45 @@
+{% include 'base2.html' %}
+<script type="text/javascript">
+    function mostrar()
+    {
+        document.getElementById('agPersonal').style.display = 'block';
+    }
+</script>
+<table  class="table table-hover table-bordered">
+<thead>
+    
+<tr>
+
+<th><center>ID</center></th>
+<th><center>IDENTIFICACION</center></th>
+
+</tr>
+</thead>
+<tbody>
+	
+{% for personal in personal %}
+
+<tr>
+
+<td align='center'><h5>{{ personal.id }}</h5></td>
+<td align='center'><h5>{{ personal.identificacion_personal }}</h5></td>
+<td><a href="/borrarPersonal/{{personal.id}}">Eliminar</a></td>
+</tr>
+
+
+{% endfor %}
+</table>
+<center>
+	<p><input type="button" value="Agregar" onclick="mostrar()"></p>
+
+	<div style="display:none;margin-left:5px;" id="agPersonal">
+
+		<form action="/agregarPersonal" name="identificacion" method="post">{% csrf_token %}
+
+			<p> IDENTIFICACION: <input  type="text" size="25" name="identificacion" ></p>
+			<input style="margin-left:75px " type="submit" value="OK">
+
+		</form>
+
+	</div>
+</center>
