@@ -22,9 +22,7 @@ def readRfid(serialPort):
         while 1:
                 userCode = serialPort.readline()
                 
-                if (len(userCode) > 6):
-                        if (userCode[5:]=="332FA"):
-                                print "*****LO TOMO BIEN******"
+                if (len(userCode) > 6 and userCode[5:]<>"332FA"):
                         vectorRfid = []
                         vectorRfid =  userCode.split(chr(13).encode('ascii'))
                         rfid = vectorRfid[0]
