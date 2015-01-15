@@ -39,4 +39,5 @@ urlpatterns = patterns('',
     url(r'editarFranja/(?P<idFranja>\d+)$','control.views.editarFranja'),
     url(r'^ayuda', 'control.views.ayuda', name='ayuda'),
     url(r'^error403', 'control.views.error403', name='error403'),
+    url(r'^usershowphoto/(?P<dateFrom>[-\w]+)$', 'control.views.usershowphoto', name='usershowphoto'),
 )

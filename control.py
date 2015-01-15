@@ -22,7 +22,9 @@ def readRfid(serialPort):
         while 1:
                 userCode = serialPort.readline()
                 
-                if len(userCode) > 6:
+                if (len(userCode) > 6):
+                        if (userCode[5:]=="332FA"):
+                                print "*****LO TOMO BIEN******"
                         vectorRfid = []
                         vectorRfid =  userCode.split(chr(13).encode('ascii'))
                         rfid = vectorRfid[0]
@@ -49,16 +51,18 @@ def captureCode(rfid):
                 mi_query = "INSERT INTO control_captura_clave (id,clave_captura,lugar_captura) VALUES ('1','%s','LAC')"%(rfid)
                 cursor.execute(mi_query)
                 db.commit()
-                
+                print "inserto bien en la base de datos"
                 time.sleep(5)
 
                 mi_query= "DELETE FROM control_captura_clave WHERE id='1'"
                 cursor.execute(mi_query)
                 db.commit()
-                
+                print "borro bien de la base de datos"
         except IOError as e:
+                print "hubo error en la funcion capturar"
                 pass
         except ValueError:
+                print "hubo error en la funcion capturar222"
                 pass
 
 

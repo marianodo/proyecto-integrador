@@ -120,6 +120,7 @@ def capturar(request):
         try:
             codes = Captura_clave.objects.get(id=1)
             code = codes.clave_captura #Si la clave es capturada se guarda en la BD y de aca lee
+            
         except:
             flag += 1 #Si no se captura salta error y vuelve a intentar hasta 10 intentos
             time.sleep(1)
@@ -139,9 +140,11 @@ def showphoto(request):
         dateFrom = request.POST['from']
         pathTotal = "/usr/src/web/login/static/photo/" + dateFrom + "*.jpg"
         photoFiles = glob.glob(pathTotal)
+        if dateFrom == '':
+            dateFrom = "Todas las fotos"
     else:
-        today = time.strftime("%d-%m-%Y")
-        pathTotal = "/usr/src/web/login/static/photo/" + today + "*.jpg"
+        dateFrom = time.strftime("%d-%m-%Y")
+        pathTotal = "/usr/src/web/login/static/photo/" + dateFrom + "*.jpg"
         photoFiles = glob.glob(pathTotal)
     photo = []
     for photoFile in photoFiles:
@@ -149,8 +152,23 @@ def showphoto(request):
         photo.append(photoPath[7]) #Agrego las fotos en una lista
     photo.sort() # Ordeno la lista
     photo.reverse()
-    return render_to_response('showphoto.html',{'photos': photo },RequestContext(request))
-    
+    dateFrom = dateFrom + " (Se encontraron " + str(len(photo)) + " fotos)"
+    return render_to_response('showphoto.html',{'photos': photo, 'dateFrom': dateFrom },RequestContext(request))
+
+@csrf_protect
+def usershowphoto(request,dateFrom):
+    print dateFrom
+    print "############"
+    pathTotal = "/usr/src/web/login/static/photo/" + dateFrom + "*.jpg"
+    photoFiles = glob.glob(pathTotal)     
+    photo = []
+    for photoFile in photoFiles:
+        photoPath = photoFile.split("/")
+        photo.append(photoPath[7]) #Agrego las fotos en una lista
+    photo.sort() # Ordeno la lista
+    photo.reverse()
+    dateFrom = dateFrom + " (Se encontraron " + str(len(photo)) + " fotos)"
+    return render_to_response('showphoto.html',{'photos': photo, 'dateFrom': dateFrom },RequestContext(request))      
     
 @login_required()
 def WebEventos(request):
@@ -186,10 +204,15 @@ def addUser(request):
             tarjeta = datos['tarjeta']
             fechaalta = datetime.now()
             categoria = datos['categoria']
-            datosusr = datos_usuarios_dj(nombres_usuario=nombre,apellidos_usuario=apellido,dni_usuario=dni,telefono_usuario=telefono,direccion_usuario=direccion,localidad_usuario=localidad,email_usuario=email,clave_usuario=clave,estado_usuario=estado,tarjeta_usuario=tarjeta,fecha_alta_usuario=fechaalta,categoria_usuario_id=categoria) 
-            datosusr.save()
-            usuarios = datos_usuarios_dj.objects.all()
-            return render_to_response('tablaUsuarios.html',{'usuarios': usuarios},RequestContext(request))
+            busquedaClave = datos_usuarios_dj.objects.filter(clave_usuario=clave).first()
+            print busquedaClave
+            if (busquedaClave == None):
+                datosusr = datos_usuarios_dj(nombres_usuario=nombre,apellidos_usuario=apellido,dni_usuario=dni,telefono_usuario=telefono,direccion_usuario=direccion,localidad_usuario=localidad,email_usuario=email,clave_usuario=clave,estado_usuario=estado,tarjeta_usuario=tarjeta,fecha_alta_usuario=fechaalta,categoria_usuario_id=categoria) 
+                datosusr.save()
+                usuarios = datos_usuarios_dj.objects.all()
+                return render_to_response('tablaUsuarios.html',{'usuarios': usuarios},RequestContext(request))
+            else:
+                return render_to_response('agregarUsuario.html',{'identPersonals':"True",'user': request.user},RequestContext(request))
         return render_to_response('agregarUsuario.html',{'identPersonals':identPersonals,'user': request.user},RequestContext(request))
     else:
         return HttpResponseRedirect("/error403")
@@ -231,11 +254,9 @@ def exportarAExcel (request,name): #Exporta la tabla deseada en "name" a archivo
             else:
                 values_list = Eventos_no_Permitidos_dj.objects.order_by('-id')[:int(count)].values_list()
         if name == 'eventosFecha':
-            
             values_list = Eventos_dj.objects.filter(fechayhora_eventos__contains = count).values_list()
-            print values_list
-            for a in values_list:
-                print "##",a
+        if name == 'eventosFechaWeb':
+            values_list = Web_eventos_dj.objects.filter(fechayhora_eventos_web__contains = count).values_list()
             
     else:
         values_list = datos_usuarios_dj.objects.all().values_list()

@@ -1,24 +1,12 @@
 {% include 'base2.html' %}
-<head>
-<!-- Bootstrap CSS and bootstrap datepicker CSS used for styling the demo pages
-        <link rel="stylesheet" href="/static/css/datepicker.css">
-        <link rel="stylesheet" href="/static/css/bootstrap.css">-->
+<center><h2>Eventos Registrados</h2></center>
 
-</head>
-<body>
-    <script src="/static/js/jquery-1.9.1.min.js"></script>
-        <script src="/static/js/bootstrap-datepicker.js"></script>
-        
-            <script type="text/javascript">
-                // When the document is ready
-                $(document).ready(function () {
-                    
-                    $('#example1').datepicker({
-                        format: "dd-mm-yyyy"
-                    });  
-                
-                });
-            </script>
+<head>
+
+<script src="/static/js/jquery-1.9.1.min.js"></script>
+<script src="/static/js/bootstrap-datepicker.js"></script>
+ <link rel="stylesheet" href="/static/css/datepicker.css">       
+           
     <script languaje="javascript">
 
 function habilita(form)
@@ -79,7 +67,10 @@ document.getElementById(nombreCapa).style.visibility="visible";
 function ocultar(nombreCapa){  
 document.getElementById(nombreCapa).style.visibility="hidden";  
 }  
-</script> <div style="display:none" id="capa2"><center><img align="center" src="/static/img/cargando2.gif"></center></div>
+</script>
+</head>
+<body>
+     <div style="display:none" id="capa2"><center><img align="center" src="/static/img/cargando2.gif"></center></div>
 
 <table  class="table table-hover table-bordered">
 <thead>
@@ -101,7 +92,7 @@ document.getElementById(nombreCapa).style.visibility="hidden";
 <td align='center'><h5>{{ usuario.fechayhora_eventos }}</h5></td>
 <td align='center'><h5>{{ usuario.lugar_eventos }}</h5></td>
 <td><a href="/eventosUsuario/{{usuario.id_usuario_eventos}}">Ver Eventos</a><br/>
-<a href="/showphoto">Ver Foto</a><br/>
+ <!-- <a href="/usershowphoto/{{usuario.fechayhora_eventos}}">Ver Foto</a><br/>  -->
 </td>
 
 {% endfor %}

@@ -1,4 +1,6 @@
 {% include "base2.html" %}
+<center><h2>Agregar Usuario</h2></center>
+<br>
 <html>
 <head>
 <script>
@@ -20,6 +22,12 @@
        
         return true;
     }
+</script>
+<script language="Javascript">
+function cartel() {
+    alert("Existe un usuario con la misma clave. Por favor complete los datos nuevamente")
+    
+}
 </script>
 </head>
 <body>
@@ -58,21 +66,27 @@
     {% endif%}
     {% endfor %}
 </select>
-
+{% if identPersonal == "True" %}
+    <script>
+    cartel();
+    </script>
+{% endif %}
 
 </table>
 <p align="center"><input type="submit" value="Grabar" style="margin-top:10px"></p>
 
 </form>
+<a href="/capturar">
+       <center> <input type="submit" value="Capturar Clave" class="btn btn-default" ></center>
+    </a>
+    <br>
 </div>
 </th>
 
-<th valign="center"  >
-   <a href="/capturar">
-        <input type="submit" value="Capturar Clave" class="btn btn-default" title="Logout">
-    </a>
 
-</th>
+   
+
+
 
 <tr>
 <td colspan="2" >

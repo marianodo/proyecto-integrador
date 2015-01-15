@@ -1,24 +1,14 @@
 {% include 'base2.html' %}
+<center><h2>Capturas de imagen</h2></center>
+
 <html>
     <head>
         <title>bootstrap datepicker examples</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <!-- Bootstrap CSS and bootstrap datepicker CSS used for styling the demo pages
-        <link rel="stylesheet" href="/static/css/datepicker.css">
-        <link rel="stylesheet" href="/static/css/bootstrap.css">-->
-    </head>
-    <body>
-        <form action="/showphoto" method="post">{% csrf_token %}
-        <div class="container">
-            <div class="hero-unit">
-            <i>Seleccione un día: </i> <input  type="text" placeholder="DD-MM-YYYY" name="from"  id="example1">
-            <button type="submit" class="standar">Cargar</button>
-            </div>
-        </div>
-        <!-- Load jQuery and bootstrap datepicker scripts -->
         <script src="/static/js/jquery-1.9.1.min.js"></script>
         <script src="/static/js/bootstrap-datepicker.js"></script>
-        
+        <link rel="stylesheet" href="/static/css/datepicker.css">
+
             <script type="text/javascript">
                 // When the document is ready
                 $(document).ready(function () {
@@ -29,6 +19,17 @@
                 
                 });
             </script>
+    </head>
+    <body>
+        <form action="/showphoto" method="post">{% csrf_token %}
+        <div class="container">
+            <div class="hero-unit">
+            <i>Seleccione un día: </i> <input  type="text" placeholder="DD-MM-YYYY" name="from"  id="example1">
+            <button type="submit" class="standar">Cargar</button> <i>{{dateFrom}}</i>
+            </div>
+        </div>
+        <!-- Load jQuery and bootstrap datepicker scripts -->
+        
     
          
         </form>
