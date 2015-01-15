@@ -19,8 +19,21 @@ import glob
 #from datetime import datetime, date
 import xlwt
 import tablib
-import os
 import commands
+
+from django.core.servers.basehttp import FileWrapper
+import urlparse
+from urllib2 import urlopen
+from urllib import urlretrieve
+from django.conf import settings
+import sys
+import zipfile
+import tempfile
+import StringIO
+
+import mimetypes
+
+
 GPIO.setmode(GPIO.BOARD) ## Use board pin numbering
 GPIO.setup(3, GPIO.OUT) #
 
@@ -64,7 +77,7 @@ def mostrarTablaEventos(request): # Muestra eventos
     if request.method=="POST": #Si hay post es prque se quiere ver todos los eventos
         eventos = Eventos_dj.objects.order_by('-id')
         return render_to_response('tablaEventos.html',{'usuarios': eventos },RequestContext(request))
-    eventos = Eventos_dj.objects.order_by('-id')[:50]
+    eventos = Eventos_dj.objects.order_by('-id')[:30]
     return render_to_response('tablaEventos.html',{'usuarios': eventos },RequestContext(request))
 
 @login_required()
@@ -403,3 +416,15 @@ def ayuda(request):
 @login_required()
 def error403(request):
     return render_to_response('403.html', context_instance=RequestContext(request))
+
+@login_required()    
+def file_download(request,filename):
+
+    filepath = os.path.join(settings.MEDIA_ROOT, filename)
+    wrapper = FileWrapper(open(filepath, "rb"))
+    content_type = mimetypes.guess_type(filepath)[0]
+    response = HttpResponse(wrapper, content_type="application/octet-stream")
+    response['Content-Disposition'] = "attachment; filename=%s" % filename
+    return response
+    
+    
