@@ -81,6 +81,12 @@ def mostrarTablaEventos(request): # Muestra eventos
     return render_to_response('tablaEventos.html',{'usuarios': eventos },RequestContext(request))
 
 @login_required()
+def mostrarEventosUsuario(request,id_usuario):
+    eventos = Eventos_dj.objects.filter(id_usuario_eventos=id_usuario).order_by('-id')
+    return render_to_response('eventosUsuario.html',{'usuarios': eventos, 'id_usuario':id_usuario })
+
+
+@login_required()
 def eliminar_usuario(request, id_usuario):
     if request.user.is_superuser: #Para agregar,editar o borrar se necesita ser superuser
         usuario=datos_usuarios_dj.objects.get(id=id_usuario)
@@ -142,10 +148,7 @@ def capturar(request):
         code = "No_se_encontro"
     return render(request, 'agregarUsuario.html', {'identPersonals':identPersonals, 'clave': code})
 
-@login_required()
-def mostrarEventosUsuario(request,id_usuario):
-    eventos = Eventos_dj.objects.filter(id_usuario_eventos=id_usuario).order_by('-id')
-    return render_to_response('eventosUsuario.html',{'usuarios': eventos })
+
 
 @csrf_protect
 def showphoto(request):
@@ -243,8 +246,6 @@ def macadr(request):
 
 @csrf_exempt    
 def exportarAExcel (request,name): #Exporta la tabla deseada en "name" a archivo en excel
-    
-
     if name <> "usuarios":
         
         datos = request.POST
@@ -298,20 +299,17 @@ def exportarAExcel (request,name): #Exporta la tabla deseada en "name" a archivo
     book.save(response)
     usuarios = datos_usuarios_dj.objects.all()
     return response
-@csrf_exempt
-def exportar (request):
+
+@csrf_exempt    
+def exportarEventoUser(request,idUser): #Exporta la tabla deseada en "name" a archivo en excel
     
+    values_list = Eventos_dj.objects.filter(id_usuario_eventos=idUser).order_by('-id').values_list()
+
     book = xlwt.Workbook(encoding='utf-8')
     sheet = book.add_sheet('untitled')
     default_style = xlwt.Style.default_style
     datetime_style = xlwt.easyxf(num_format_str='dd/mm/yyyy hh:mm')
     date_style = xlwt.easyxf(num_format_str='dd/mm/yyyy')
-
-    
-   
-    values_list = datos_usuarios_dj.objects.all().values_list()
-    
-   
 
     for row, rowdata in enumerate(values_list):
         for col, val in enumerate(rowdata):
@@ -325,22 +323,12 @@ def exportar (request):
             sheet.write(row, col, val, style=style)
 
     
-    response = HttpResponse(content_type='application/vnd.ms-excel')
-    stringName = "usuarios" + ".xls"
+    response = HttpResponse(content_type="application/vnd.ms-excel")
+    stringName =  "eventosUsuario.xls"
     response['Content-Disposition'] = 'attachment; filename=' + stringName
     book.save(response)
     usuarios = datos_usuarios_dj.objects.all()
     return response
-    # headers = ('Book', 'Author')
-    # data = []
-    # data = tablib.Dataset(*data, headers=headers)
-    # books =  datos_usuarios_dj.objects.all()
-    # for book in books:
-    #     data.append(book)
-    # response = HttpResponse(data.xls, content_type='application/vnd.ms-excel;charset=utf-8')
-    # response['Content-Disposition'] = "attachment; filename=export.xls"
-
-    # return response
 
 @login_required()
 def mostrarFranjasHorarias(request):
@@ -427,4 +415,10 @@ def file_download(request,filename):
     response['Content-Disposition'] = "attachment; filename=%s" % filename
     return response
     
-    
+@login_required()
+def reset(request):
+    if request.user.is_superuser:
+        a = os.system ("reboot")
+        return HttpResponseRedirect("/home")
+    else:
+        return HttpResponseRedirect("/error403")
