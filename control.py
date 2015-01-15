@@ -22,7 +22,7 @@ def readRfid(serialPort):
         while 1:
                 userCode = serialPort.readline()
                 
-                if (len(userCode) > 6 and userCode[5:]<>"332FA"):
+                if (len(userCode) > 6):
                         vectorRfid = []
                         vectorRfid =  userCode.split(chr(13).encode('ascii'))
                         rfid = vectorRfid[0]
@@ -105,10 +105,16 @@ def searchUser(rfid,db,cursor):
                         checkTime(db,cursor,idUser)
                 registerEvent(db,cursor,user)
         else:
-                # No estas en la BD
+                registerFailedEvent(db,cursor,rfid)
+                
+
+def registerFailedEvent(db,cursor,rfid):
+        if rfid[5:]<>"00000":
                 mi_query = "INSERT INTO control_eventos_no_permitidos_dj(clave_eventos_no_permitido, fechayhora_eventos_no_permitido, lugar_eventos_no_permitido) VALUES ('%s',DATETIME('now','localtime'),'LAC')"%(rfid)
                 cursor.execute(mi_query)
                 db.commit()
+
+
 def takePicture():
         separarEnter = []
         archivoBuscar = 'asterisk -r -x "sip show channels" ' # Antes de abrir puerta chequea comunciacion

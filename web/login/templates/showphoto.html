@@ -38,13 +38,17 @@
    
   <div class="col-sm-1 col-md-2">
     <a href="/static/photo/{{photo}}" class="thumbnail">
-      
        <img width=100 height=100  src="/static/photo/{{photo}}" class="img-rectangle"> 
-    <div class="caption">
-        <p>{{photo}}</p>
-    </div>
+       {{photo}}
     </a>
-  </div>
+  
+  
+    <center><a href="/file_download/{{photo}}">
+    <button type="button" class="btn btn-default" title="Descargar foto {{photo}}">
+        <span class="glyphicon glyphicon-download"></span>
+    </button></center>
+      <br>
+    </div>
 
       {%endfor%}
 </html>
