@@ -1,4 +1,8 @@
 {% include 'base2.html' %}
+<html>
+<head>
+</head>
+<body>
 <center><h2>Eventos del Usuario</h2></center>
 
 <table  class="table table-hover table-bordered">
@@ -14,11 +18,18 @@
 <tbody>
 {% for usuario in usuarios %}
 <tr>
+	
 <td align='center'><h5>{{ usuario.nombres_eventos }}</h5></td>
 <td align='center'><h5>{{ usuario.apellidos_eventos }}</h5></td>
 <td align='center'><h5>{{ usuario.fechayhora_eventos }}</h5></td>
 <td align='center'><h>{{ usuario.lugar_eventos }}</h5></td>
 
 {% endfor %}
+
 </tbody>
 </table>
+<form  action="/exportarEventoUser/{{id_usuario}}" method="post">{% csrf_token %}
+    <button  backgroundtype="submit" class="standar">Exportar</button>
+</form>
+</body>
+</html>

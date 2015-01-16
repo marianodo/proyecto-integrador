@@ -41,7 +41,7 @@
     <td align='center'><h6>{{ usuario.tarjeta_usuario }}</h6></td>
     <td align='center'><h6>{{ usuario.fecha_alta_usuario }}</h6></td>
     <td align='center'><h6>{{ usuario.categoria_usuario.identificacion_personal }}</h6></td>
-    <td><a href="/editarUsuario/{{usuario.id}}">Editar</a><br/><a href="/borrar/{{usuario.id}}" onClick="return confirm('¿Desea borrar el registro?')" >Eliminar</a></td>
+    <td><a href="/editarUsuario/{{usuario.id}}">Editar</a><br/><a href="/borrar/{{usuario.id}}" onClick="return confirm('¿Desea borrar el registro?')" >Eliminar</a><br><a href="/eventosUsuario/{{usuario.id}}">Eventos</a></td>
 </tr>
 
 {% empty %}
