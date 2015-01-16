@@ -1,7 +1,7 @@
 {% include "base2.html" %}
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<a name="inicio" id="inicio"><center><FONT COLOR=black><h2>Ayuda</h2></font></center></a><br><br>
+<a name="inicio" id="inicio"><center><FONT COLOR=black><h2>Ayuda</h2></font></center></a><br>
 </head>
 <body>
 <a href="#Acerca" style="margin-left:5%"><FONT SIZE=4> + Acerca de Control de Acceso LAC</font></a><br><br>
@@ -14,14 +14,15 @@
 <a href="#Usuario" style="margin-left:12%"><FONT SIZE=3> + Agregar usuario al sistema de acceso</font></a><br><br>
 <a href="#Categoria" style="margin-left:12%"><FONT SIZE=3> + Agregar categoria de usuarios</font></a><br><br>
 <a href="#Franjas" style="margin-left:12%"><FONT SIZE=3> + Agregar franjas horarias</font></a><br><br>
-<a href="#Errores" style="margin-left:5%"><FONT SIZE=4> + Errores y posibles soluciones</font></a><br><br><br><br><br>
+<a href="#editarFranjas" style="margin-left:12%"><FONT SIZE=3> + Editar franjas horarias</font></a><br><br>
+<a href="#Errores" style="margin-left:12%"><FONT SIZE=3> + Solución general a errores</font></a><br><br><br><br><br>
 <div class="panel panel-default">
   <div class="panel-heading"></div>
   
 </div>
 
 <center><a name="Acerca" id="Acerca" > <FONT COLOR=black><h3><br><br><u>Acerca de Control de Acceso LAC</u></h3></font></a><br>
-	<FONT FACE="arial" SIZE=3 COLOR=black  > El Control de Acceso, Seguridad y Vigilancia del Laboratorio de Arquitectura de Computadoras (LAC) fue desarrollado como Tesis de grado en el año 2015 por los estudiantes DOMINGUEZ, Mariano y JUAN, Leandro de la carrera de Ingeniería en Computación de la Facultad de Ciencias Exactas, Físicas y Naturales (UNC).</font><br><br>
+    <FONT FACE="arial" SIZE=3 COLOR=black  > El Control de Acceso, Seguridad y Vigilancia del Laboratorio de Arquitectura de Computadoras (LAC) fue desarrollado como Tesis de grado en el año 2015 por los estudiantes DOMINGUEZ, Mariano y JUAN, Leandro de la carrera de Ingeniería en Computación de la Facultad de Ciencias Exactas, Físicas y Naturales (UNC).</font><br><br>
 <a href="#inicio"><FONT SIZE=3> Volver</font></a></center>
 
 <center><a name="Secciones" id="Secciones" > <FONT COLOR=black><h3><br><br><u>Descripcion de funcionalidades</u></h3></font></a><br>
@@ -30,10 +31,10 @@
 <center><a name="Usuarioweb" id="Usuarioweb" > <FONT COLOR=black><h4><br><br><br><u>Agregar usuario web</u></h4></font></a><br>
 <FONT  FACE="arial" SIZE=3 COLOR=black  > Solo los administradores superusuario (admin) pueden encargarse de agregar y eliminar usuarios para que administren el entorno web. El admin podra acceder a todas las funcionalidades presentes en el entorno web. Aquellos que no son superusuarios tendran los permisos para acceder a todas las funciones del software de control web a excepcion de la siguientes:<br><br>
 
-		** Agregar, editar o eliminar usuarios del sistema de acceso **<br>
-		** Agregar, editar o eliminar franjas horarias **<br>
-		** Agregar o eliminar categorias de usuarios **<br>
-		** Reiniciar la placa Raspberry Pi **<br><br>
+        ** Agregar, editar o eliminar usuarios del sistema de acceso **<br>
+        ** Agregar, editar o eliminar franjas horarias **<br>
+        ** Agregar o eliminar categorias de usuarios **<br>
+        ** Reiniciar la placa Raspberry Pi **<br><br>
 
 Para agregar un usuario web nuevo, el administrador superusuario (admin) debera ingresar a la seccion <i>admin</i> (http://[IP de Raspberry]/admin) de la pagina web. Luego de colocar su usuario y contraseña ir al apartado <i>usuarios</i> y hacer click en <b>agregar</b>. En la nueva pagina se deben completar los datos (usuario y contraseña) del nuevo usuario a agregar y clickear en el boton <b>Guardar y continuar editando</b>. Por ultimo completar los datos personales del usuario, mantener tildada la opcion de usuario <i>ACTIVO</i>, y tambien se puede tildar la opcion <i>SUPERUSUARIO</i> si se desea que la persona a agregar sea administrador con todos los privilegios. Solo queda hacer click en el boton <b>Guardar</b> para completar el proceso. </font><br><br>
 <a href="#inicio" ><FONT SIZE=3> Volver</font></a></center>
@@ -41,8 +42,8 @@ Para agregar un usuario web nuevo, el administrador superusuario (admin) debera 
 <center><a name="Exportar" id="Exportar" > <FONT COLOR=black><h4><br><br><br><u>Exportar tablas a Excel</u></h4></font></a><br>
 <FONT  FACE="arial" SIZE=3 COLOR=black  > Existe la posibilidad de exportar las siguientes tablas a una hoja de datos de Excel: Tabla de eventos, tabla de eventos web, tabla de eventos de acceso denegado, y tabla de usuarios.<br>
  Para ello hay que dirigirse a la seccion correspondiente, las cuales se encuentran en el extremo derecho de la barra de menu y luego ubicarse en la parte inferior de la pagina a la que se accedio.<br> 
- 	En el caso de la tabla de usuarios solo debe clickearse en el boton <button  style="background-color: #F2F2F2;color:#1C1C1C;" id="exportar" name="exportar" backgroundtype="submit" class="standar">Exportar</button> para que comience la descarga de la tabla con TODOS los usuarios registrados en el sistema de acceso.<br>
-	Para el caso de las tablas de eventos existen 2 opciones para exportar datos: se puede exportar la tabla por cantidad (Ultimos 100, ultimos 200, ultimos 500, ultimos 1000 o Todos) o bien se pueden exportar los eventos ocurridos en un dia especifico. Solo hace falta tildar la opcion que se desea (dejando la otra opcion bloqueada) y luego elegir la cantidad o el dia de los eventos que se quieran exportar. Por ultimo hacer click en el boton <button  style="background-color: #F2F2F2;color:#1C1C1C;" id="exportar" name="exportar" backgroundtype="submit" class="standar">Exportar</button> y la descarga comenzara inmediatamente.    </font><br><br>
+    En el caso de la tabla de usuarios solo debe clickearse en el boton <button  style="background-color: #F2F2F2;color:#1C1C1C;" id="exportar" name="exportar" backgroundtype="submit" class="standar">Exportar</button> para que comience la descarga de la tabla con TODOS los usuarios registrados en el sistema de acceso.<br>
+    Para el caso de las tablas de eventos existen 2 opciones para exportar datos: se puede exportar la tabla por cantidad (Ultimos 100, ultimos 200, ultimos 500, ultimos 1000 o Todos) o bien se pueden exportar los eventos ocurridos en un dia especifico. Solo hace falta tildar la opcion que se desea (dejando la otra opcion bloqueada) y luego elegir la cantidad o el dia de los eventos que se quieran exportar. Por ultimo hacer click en el boton <button  style="background-color: #F2F2F2;color:#1C1C1C;" id="exportar" name="exportar" backgroundtype="submit" class="standar">Exportar</button> y la descarga comenzara inmediatamente.    </font><br><br>
 <a href="#inicio" ><FONT SIZE=3> Volver</font></a></center>
 
 <center><a name="EventosUsuario" id="EventosUsuario" > <FONT COLOR=black><h4><br><br><br><u>Ver eventos de un usuario especifico</u></h4></font></a><br>
@@ -64,20 +65,44 @@ En primer lugar hay que dirigirse a la seccion <i>Ver eventos</i> <button type="
 <FONT FACE="arial" SIZE=3 COLOR=black  > Para poder ver las capturas de imagen realizadas por la camara web hay que dirigise a la seccion <i>Ver imagenes</i> <button type="button" class="btn btn-default" title="Ver Imagenes">
                 <span class="glyphicon glyphicon-picture"></span>
             </button> que se encuentra en el extremo derecho de la barra de menu. <br>
-	Existen dos posibilidades para visualizar las imagenes: En primer lugar se pueden ver todas las imagenes capturadas existentes dentro de la misma pagina. Para ello se debe hacer click en el boton <button type="submit" class="standar">Cargar</button> sin haber elegido ninguna fecha en el casillero selector. Tambien se pueden visualizar las imagenes que fueron capturadas en un dia especifico, para lo cual hay que colocarse en el casillero selector y se abrira un calendario en el cual debera elegirse la fecha que se desea. Luego clickear en el boton <button type="submit" class="standar">Cargar</button> para poder visualizar las imagenes correspondientes. <br>
-	En el caso de querer descargar una imagen en particular solo hacer que hacer click en el boton de descarga correspondiente a cada imagen </font><br><br>
+    Existen dos posibilidades para visualizar las imagenes: En primer lugar se pueden ver todas las imagenes capturadas existentes dentro de la misma pagina. Para ello se debe hacer click en el boton <button type="submit" class="standar">Cargar</button> sin haber elegido ninguna fecha en el casillero selector. Tambien se pueden visualizar las imagenes que fueron capturadas en un dia especifico, para lo cual hay que colocarse en el casillero selector y se abrira un calendario en el cual debera elegirse la fecha que se desea. Luego clickear en el boton <button type="submit" class="standar">Cargar</button> para poder visualizar las imagenes correspondientes. <br>
+    En el caso de querer descargar una imagen en particular solo hacer que hacer click en el boton de descarga correspondiente a cada imagen </font><br><br>
 <a href="#inicio" ><FONT SIZE=3> Volver</font></a></center>
 
-<center><a name="Usuario" id="Usuario" > <FONT COLOR=black><h3><br><br><u>Agregar usuario al sistema de acceso</u></h3></font></a><br>
+<center><a name="Usuario" id="Usuario" > <FONT COLOR=black><h4><br><br><u>Agregar usuario al sistema de acceso</u></h4></font></a><br>
 <FONT  FACE="arial" SIZE=3 COLOR=black  > Para registrar un usuario al sistema de acceso es necesario dirigirse al boton <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
 
                  <span><span class="glyphicon glyphicon-chevron-down "></span></span>
-    </button> en el extremo derecho de la barra de menu y luego hacer click en la opcion <i>Agregar Usuario</i>. Posteriormente aparecera una tabla estilo formulario la cual debemos completar con los datos personales del usuario a registrar. A su vez debemos seleccionar la opcion de ACTIVO en el estado si queremos habilitar al nuevo usuario para que pueda ingresar al laboratorio, elegir la opcion de TARJETA o LLAVERO dependiendo de cual sera el medio por el cual ingresara al establecimiento y luego asignarle también una CATEGORÍA de la lista de posibilidades.<br>
-    Por ultimo debemos asignar una clave de tarjeta para el usuario. Para ello debemos hacer click en el boton <input type="submit" value="Capturar Clave" class="btn btn-default" > y comenzara una cuenta regresiva de 10 segundos aproximadamente. En ese tiempo debemos aproximar una tarjeta o llavero nuevo al lector RFID externo al Laboratorio y la clave sera capturada y completada automaticamente en el casillero correspondiente. Es necesario que la captura de la clave se realice antes de completar todos los datos previos, ya que luego de la captura se eliminara la informacion presente en cada uno de los casilleros. Una vez completados todos los datos se debe clickear el boton <input type="submit" value="Grabar" > para completar el proceso. <br><br>
+    </button> en el extremo derecho de la barra de menu y luego hacer click en la opcion <i>Agregar Usuario</i>. Posteriormente aparecera una tabla estilo formulario la cual se deben completar con los datos personales del usuario a registrar. A su vez se debe seleccionar la opcion de ACTIVO en el estado si se quiere habilitar al nuevo usuario para que pueda ingresar al laboratorio, elegir la opcion de TARJETA o LLAVERO dependiendo de cual sera el medio por el cual ingresara al establecimiento y luego asignarle también una CATEGORÍA de la lista de posibilidades.<br>
+    Por ultimo se debe asignar una clave de tarjeta para el usuario. Para ello hay hacer click en el boton <input type="submit" value="Capturar Clave" class="btn btn-default" > y comenzara una cuenta regresiva de 10 segundos aproximadamente. En ese tiempo se debe aproximar una tarjeta o llavero nuevo al lector RFID externo al Laboratorio y la clave sera capturada y completada automaticamente en el casillero correspondiente. Es necesario que la captura de la clave se realice antes de completar todos los datos previos, ya que luego de la captura se eliminara la informacion presente en cada uno de los casilleros. Una vez completados todos los datos se debe clickear el boton <input type="submit" value="Grabar" > para completar el proceso. <br><br>
 <a href="#inicio"><FONT SIZE=3> Volver</font></a></center>
 
-<center><a name="Errores" id="Errores" > <FONT COLOR=black><h3><br><br><u>Errores y posibles soluciones</u></h3></font></a><br>
-<FONT  FACE="arial" SIZE=3 COLOR=black  > El Control de Acceso, Seguridad y Vigilancia del Laboratorio de Arquitectura de Computadoras (LAC) fue desarrollado como Tesis de Grado por los estudiantes Dominguez, Mariano y Juan, Leandro de la carrera de Ingeniería en Computación de la Facultad de Ciencias Exactas, Físicas y Naturales.<br><br>
+<center><a name="Categoria" id="Categoria" > <FONT COLOR=black><h4><br><br><u>Agregar categoría de usuarios</u></h4></font></a><br>
+<FONT  FACE="arial" SIZE=3 COLOR=black  > Para registrar una nueva categoría de usuario al sistema de acceso es necesario dirigirse al boton <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+
+                 <span><span class="glyphicon glyphicon-chevron-down "></span></span>
+    </button> en el extremo derecho de la barra de menu y luego hacer click en la opcion <i>Administrar Franjas Horarias</i>. En la nueva pantalla aparecera en su parte superior una seccion que nos permite <i>Seleccionar una categoria</i>, y mas abajo ofrece la opcion de <i>Agregar Categoría</i> con el siguiente boton: <button type="button" class="btn btn-default" title="Agregar nuevo personal">
+                <span class="glyphicon glyphicon-plus"></span> 
+            </button>. Al hacer click en el mismo, redireccionara a una nueva pagina en la que se muestran las actuales categorías ya creadas en la base de datos. De no existir la que se necesita se debe hacer click en el boton <input type="button" value="Agregar"> y posteriormente en el casillero IDENTIFICACION que aparece se debe completar con el nombre de la categoría a agregar. Al clickear en el boton <input type="submit" value="OK"> se completa el registro de la nueva categoria de usuarios.<br><br> 
 <a href="#inicio"><FONT SIZE=3> Volver</font></a></center>
-</body>
-</html>
+
+<center><a name="Franjas" id="Franjas" > <FONT COLOR=black><h4><br><br><u>Agregar franjas horarias</u></h4></font></a><br>
+<FONT  FACE="arial" SIZE=3 COLOR=black  > Para registrar una nueva franja horaria al sistema de acceso es necesario dirigirse al boton <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+
+                 <span><span class="glyphicon glyphicon-chevron-down "></span></span>
+    </button> en el extremo derecho de la barra de menu y luego hacer click en la opcion <i>Administrar Franjas Horarias</i>. En la nueva pantalla aparecera una tabla con las franjas horarias habilitadas para la categoría por defecto (es decir la primera en crearse en el sistema). Luego en la parte superior de la pagina hay que ubicarse en el casillero selector y seleccionar la categoría de usuario en la cual se desea agregar la nueva franja horaria y hacer click en el boton <button  style="background-color: #F2F2F2;color:#1C1C1C;" backgroundtype="submit" class="standar">Ver</button>. Una vez realizado dicho paso se debe ver la nueva tabla de franjas para la categoria seleccionada. Si se desea agregar una nueva franja horaria hay que dirigirse a la parte inferior de la pagina y hacer click en el boton <input type="button" value="Agregar Franja"> lo cual desplegara unas opciones que estaban ocultas. Por ultimo se deben completar los datos de la nueva franja a agregar dentro de los casilleros que aparecieron (Dia, hora de inicio y hora de finalizacion) y hacer click en el boton <input type="submit" value="Agregar"> para confirmar el proceso.<br><br> 
+<a href="#inicio"><FONT SIZE=3> Volver</font></a></center>
+
+<center><a name="editarFranjas" id="editarFranjas" > <FONT COLOR=black><h4><br><br><u>Editar franjas horarias</u></h4></font></a><br>
+<FONT  FACE="arial" SIZE=3 COLOR=black  > Para editar una franja horaria del sistema de acceso es necesario dirigirse al boton <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+
+                 <span><span class="glyphicon glyphicon-chevron-down "></span></span>
+    </button> en el extremo derecho de la barra de menu y luego hacer click en la opcion <i>Administrar Franjas Horarias</i>. En la nueva pantalla aparecera una tabla con las franjas horarias habilitadas para la categoría por defecto (es decir la primera en crearse en el sistema). Luego en la parte superior de la pagina hay que ubicarse en el casillero selector y seleccionar la categoría de usuario de la cual se desea editar la franja horaria y hacer click en el boton <button  style="background-color: #F2F2F2;color:#1C1C1C;" backgroundtype="submit" class="standar">Ver</button>. Una vez realizado dicho paso se debe ver la nueva tabla de franjas para la categoria seleccionada. Si se desea editar una franja horaria hay que dirigirse a la ultima columna de la tabla en la fila que se desea modificar y hacer click en el boton <i>Editar</i> lo cual permitira el redireccionamiento a una nueva pagina. Por ultimo se deben completar los nuevos datos que se desean para la franja horaria especificada (hora de inicio y hora de finalizacion) y hacer click en el boton <input type="submit" value="Editar"> para confirmar el proceso.<br><br> 
+<a href="#inicio"><FONT SIZE=3> Volver</font></a></center>
+
+<center><a name="Errores" id="Errores" > <FONT COLOR=black><h4><br><br><u>Solución general a errores</u></h4></font></a><br>
+<FONT  FACE="arial" SIZE=3 COLOR=black  > En el caso de que existan errores de cualquier naturaleza (y solo como ultima instancia) existe una opcion en el software de control web para reiniciar todo el sistema, y en pocos minutos se tendra el sistema funcionando de manera correcta nuevamente. Para ello es necesario dirigirse al boton <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+
+                 <span><span class="glyphicon glyphicon-chevron-down "></span></span>
+    </button> en el extremo derecho de la barra de menu y luego hacer click en la opcion <i>Reiniciar Equipo</i>.<br><br> 
+<a href="#inicio"><FONT SIZE=3> Volver</font></a></center>

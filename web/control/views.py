@@ -173,8 +173,6 @@ def showphoto(request):
 
 @csrf_protect
 def usershowphoto(request,dateFrom):
-    print dateFrom
-    print "############"
     pathTotal = "/usr/src/web/login/static/photo/" + dateFrom + "*.jpg"
     photoFiles = glob.glob(pathTotal)     
     photo = []
@@ -221,7 +219,6 @@ def addUser(request):
             fechaalta = datetime.now()
             categoria = datos['categoria']
             busquedaClave = datos_usuarios_dj.objects.filter(clave_usuario=clave).first()
-            print busquedaClave
             if (busquedaClave == None):
                 datosusr = datos_usuarios_dj(nombres_usuario=nombre,apellidos_usuario=apellido,dni_usuario=dni,telefono_usuario=telefono,direccion_usuario=direccion,localidad_usuario=localidad,email_usuario=email,clave_usuario=clave,estado_usuario=estado,tarjeta_usuario=tarjeta,fecha_alta_usuario=fechaalta,categoria_usuario_id=categoria) 
                 datosusr.save()
@@ -255,8 +252,6 @@ def exportarAExcel (request,name): #Exporta la tabla deseada en "name" a archivo
                 values_list = Eventos_dj.objects.order_by('-id').values_list()
             else:
                 values_list = Eventos_dj.objects.order_by('-id')[:int(count)].values_list()
-                for a in values_list:
-                    print a
         if name == 'eventosweb':
             if count == 2000:
                 values_list = Web_eventos_dj.objects.order_by('-id').values_list()

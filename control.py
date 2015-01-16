@@ -8,7 +8,7 @@ import os
 import commands
 import threading
 global lugar
-#SELECT dia_franjas_id,desde_franjas,hasta_franjas FROM control_datos_usuarios_dj usr join control_franjas_horarias_dj franjas on usr.categoria_usuario_id = franjas.id_personal_franjas_id where usr.id = 1 and franjas.dia_franjas_id = 2
+
 GPIO.setmode(GPIO.BOARD) ## Use board pin numbering
 GPIO.setup(3, GPIO.OUT) ## Setup GPIO Pin 7 to OUT
 lugar = 'LAC'
@@ -26,10 +26,9 @@ def readRfid(serialPort):
                         vectorRfid = []
                         vectorRfid =  userCode.split(chr(13).encode('ascii'))
                         rfid = vectorRfid[0]
-                        # thpicture = threading.Thread(target=takePicture)
-                        # threads.append(thpicture)
-                        # thpicture.start()
-                        
+                        thpicture = threading.Thread(target=takePicture)
+                        threads.append(thpicture)
+                        thpicture.start()
                         return rfid
 
 def conectBD():
@@ -49,18 +48,14 @@ def captureCode(rfid):
                 mi_query = "INSERT INTO control_captura_clave (id,clave_captura,lugar_captura) VALUES ('1','%s','LAC')"%(rfid)
                 cursor.execute(mi_query)
                 db.commit()
-                print "inserto bien en la base de datos"
                 time.sleep(5)
 
                 mi_query= "DELETE FROM control_captura_clave WHERE id='1'"
                 cursor.execute(mi_query)
                 db.commit()
-                print "borro bien de la base de datos"
         except IOError as e:
-                print "hubo error en la funcion capturar"
                 pass
         except ValueError:
-                print "hubo error en la funcion capturar222"
                 pass
 
 

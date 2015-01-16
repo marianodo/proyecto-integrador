@@ -31,7 +31,6 @@ class responseEmail(object):
 
                 # enviamos el mail
                 smtpserver.sendmail(gmail_user, self.to, msg)
-                print 'listo!'
 
                 #cerramos el servidor
                 smtpserver.close()
