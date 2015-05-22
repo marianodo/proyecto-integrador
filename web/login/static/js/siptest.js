@@ -42,6 +42,7 @@
 // in the presented order. The first working server will be used for
 // the whole session.
 //
+
 var server = null;
 if(window.location.protocol === 'http:')
 	server = "http://" + window.location.hostname + ":8090/janus";
@@ -92,7 +93,9 @@ $(document).ready(function() {
 									$('#login').removeClass('hide').show();
 									registerUsername();
 									$('#server').focus();
+
 									$('#start').removeAttr('disabled').html("Stop")
+									$('#cartelPuertaCom').removeClass('hide').show()
 										.click(function() {
 											$(this).attr('disabled', true);
 											janus.destroy();

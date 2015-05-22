@@ -31,6 +31,15 @@ function mostrarCartel()
     contenedor.style.display="block";
 }
 </script>
+
+<script language="javascript">
+
+function mostrarCartelCom()
+{
+    var contenedor=document.getElementById("cartelPuertaCom");
+    contenedor.style.display="block";
+}
+</script>
 <script language="Javascript">
 function cartel() {
 	alert("Existe una llamada en curso. Porfavor corte la comunicacion para Abrir Puerta")
@@ -41,10 +50,6 @@ function cartel() {
 
 <script type="text/javascript" src="static/js/janus.js" ></script>
 <script type="text/javascript" src="static/js/siptest.js"></script>
-<!--<link rel="stylesheet" href="/static/css/cerulean/bootstrap.css" type="text/css"/>
-<link rel="stylesheet" href="/static/css/demo.css" type="text/css"/>
-<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css"/>
-# -->
 
 	{% if flag %}
 		<body >
@@ -66,8 +71,9 @@ function cartel() {
 			<form action="/openDoor" method="post" >{% csrf_token %}
     			<center><input type="submit" name="open" id="abrirpuerta" value="Abrir Puerta" class="btn btn-default" style="background:#9DE59D"></center>
 			</form>
-			
-			<p><center><button name="callpage" class="btn btn-default" id="start">Llamar</button></center></p></br>
+			<div style="display:none" id="cartelPuerta"><center><i>Estableciendo Comunicacion. Por favor aguarde un instante...</i></center></div>
+			<div style="display:none" id="cartelPuertaCom"><center><i>Comunicacion Establecida</i></center></div>
+			<p><center><button name="callpage" class="btn btn-default" id="start" onclick="mostrarCartel()">Llamar</button></center></p></br>
 				
     <center><img src="/static/img/user.jpg" alt="logo"  ><FONT FACE="arial" SIZE=5 COLOR=grey >{{user.username}}</FONT></a></center>
 <!--style="margin-left:50px;margin-top:50px; position:left"-->
