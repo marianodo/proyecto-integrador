@@ -8,7 +8,7 @@ import os
 import commands
 import threading
 global lugar
-
+GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BOARD) ## Use board pin numbering
 GPIO.setup(3, GPIO.OUT) ## Setup GPIO Pin 7 to OUT
 lugar = 'LAC'
@@ -37,7 +37,7 @@ def conectBD():
         
         dataBase = []
         dataBase.append(db)
-        dataBase.append(cursor)                                                         
+        dataBase.append(cursor)                                                 
         return dataBase
 
 def captureCode(rfid):
@@ -53,10 +53,10 @@ def captureCode(rfid):
                 mi_query= "DELETE FROM control_captura_clave WHERE id='1'"
                 cursor.execute(mi_query)
                 db.commit()
-        except IOError as e:
-                pass
-        except ValueError:
-                pass
+        except:
+		mi_query = "DELETE FROM control_captura_clave WHERE id ='1'"
+		cursor.execute(mi_query)
+		db.commit()
 
 
 def openDoor():
