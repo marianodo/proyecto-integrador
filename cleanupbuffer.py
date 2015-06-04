@@ -1,14 +1,13 @@
-#!/usr/bin/python
-
 import os
 import fnmatch
-count = 0
-for root, dir, files in os.walk("/usr/src/web/login/static/photo/"):
-        files.sort()
-        files.reverse()
-        for items in fnmatch.filter(files, "*"):
-                count = count +1
-                if count > 40:
-                	os.remove("/usr/src/web/login/static/photo/" + items)
-                	
-        
+
+
+search_dir = "/usr/src/web/login/static/photo"
+os.chdir(search_dir)
+files = filter(os.path.isfile, os.listdir(search_dir))
+files = [os.path.join(search_dir, f) for f in files] # add path to each file
+files.sort(key=lambda x: os.path.getmtime(x))
+files.reverse()
+for i,items in enumerate(files):
+	if i > 40:
+		os.remove(items)

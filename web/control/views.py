@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 from django.shortcuts import render
 from django.shortcuts import render_to_response
 from django.views.decorators.csrf import csrf_exempt
@@ -36,7 +38,7 @@ import mimetypes
 
 GPIO.setmode(GPIO.BOARD) ## Use board pin numbering
 GPIO.setup(3, GPIO.OUT) #
-
+GPIO.setup(11, GPIO.OUT) #
 
 @login_required()
 def home(request): #Vuelve al home, pasamos Flag false ya que no existe llamada en curso
@@ -48,12 +50,21 @@ def mostrarTablaUsuarios(request):
     return render_to_response('tablaUsuarios.html',{'usuarios': usuarios })
 
 @login_required()
+def activeRelay(request,status):
+
+    if status == "on":
+        GPIO.output(11,True) #Abro puerta
+    else:
+        GPIO.output(11,False)
+    return HttpResponse('')
+
+@login_required()
 def openDoor(request):
-    separarEnter = []
-    archivoBuscar = 'asterisk -r -x "sip show channels" ' # Antes de abrir puerta chequea comunciacion
-    busqueda = commands.getoutput(archivoBuscar)
-    if busqueda.find("Tx") != -1: #Si existe comunicacion establecida, vuelve al home diciendo que tienen que cortar priemro
-        return render_to_response('home.html', {'user': request.user,"flag":True}, context_instance=RequestContext(request))           
+    # separarEnter = []
+    # archivoBuscar = 'asterisk -r -x "sip show channels" ' # Antes de abrir puerta chequea comunciacion
+    # busqueda = commands.getoutput(archivoBuscar)
+    # if busqueda.find("Tx") != -1: #Si existe comunicacion establecida, vuelve al home diciendo que tienen que cortar priemro
+    #     return render_to_response('home.html', {'user': request.user,"flag":True}, context_instance=RequestContext(request))           
     foto = os.system("curl http://localhost:8080/0/action/snapshot")
     GPIO.output(3,True) #Abro puerta
     time.sleep(3)
@@ -92,6 +103,36 @@ def eliminar_usuario(request, id_usuario):
         usuario=datos_usuarios_dj.objects.get(id=id_usuario)
         usuario.delete()
         return HttpResponseRedirect("/tablaUsuarios")
+    else:
+        return HttpResponseRedirect("/error403")
+
+@csrf_protect
+def addUser(request):
+    if request.user.is_superuser: #Agregar un usuario nuevo
+        identPersonals = Personal_dj.objects.all()
+        if request.method == 'POST':
+            datos = request.POST
+            nombre = datos['nombre']
+            apellido = datos['apellido']
+            dni = datos['dni']
+            telefono = datos['telefono']
+            direccion = datos['direccion']
+            localidad = datos['localidad']
+            email = datos['email']
+            clave = datos['clave']
+            estado = datos['estado']
+            tarjeta = datos['tarjeta']
+            fechaalta = datetime.now()
+            categoria = datos['categoria']
+            busquedaClave = datos_usuarios_dj.objects.filter(clave_usuario=clave).first()
+            if (busquedaClave == None):
+                datosusr = datos_usuarios_dj(nombres_usuario=nombre,apellidos_usuario=apellido,dni_usuario=dni,telefono_usuario=telefono,direccion_usuario=direccion,localidad_usuario=localidad,email_usuario=email,clave_usuario=clave,estado_usuario=estado,tarjeta_usuario=tarjeta,fecha_alta_usuario=fechaalta,categoria_usuario_id=categoria) 
+                datosusr.save()
+                usuarios = datos_usuarios_dj.objects.all()
+                return render_to_response('tablaUsuarios.html',{'usuarios': usuarios},RequestContext(request))
+            else:
+                return render_to_response('agregarUsuario.html',{'identPersonals':"True",'user': request.user},RequestContext(request))
+        return render_to_response('agregarUsuario.html',{'identPersonals':identPersonals,'user': request.user},RequestContext(request))
     else:
         return HttpResponseRedirect("/error403")
 
@@ -200,35 +241,7 @@ def mostrarEventosUsuarioWeb(request,id_usuario):
     eventosweb = Web_eventos_dj.objects.filter(id_usuario_eventos_web=id_usuario).order_by('-id')[:5]
     return render_to_response('eventosUsuarioWeb.html',{'usuariosWeb': eventosweb })
 
-@csrf_protect
-def addUser(request):
-    if request.user.is_superuser: #Agregar un usuario nuevo
-        identPersonals = Personal_dj.objects.all()
-        if request.method == 'POST':
-            datos = request.POST
-            nombre = datos['nombre']
-            apellido = datos['apellido']
-            dni = datos['dni']
-            telefono = datos['telefono']
-            direccion = datos['direccion']
-            localidad = datos['localidad']
-            email = datos['email']
-            clave = datos['clave']
-            estado = datos['estado']
-            tarjeta = datos['tarjeta']
-            fechaalta = datetime.now()
-            categoria = datos['categoria']
-            busquedaClave = datos_usuarios_dj.objects.filter(clave_usuario=clave).first()
-            if (busquedaClave == None):
-                datosusr = datos_usuarios_dj(nombres_usuario=nombre,apellidos_usuario=apellido,dni_usuario=dni,telefono_usuario=telefono,direccion_usuario=direccion,localidad_usuario=localidad,email_usuario=email,clave_usuario=clave,estado_usuario=estado,tarjeta_usuario=tarjeta,fecha_alta_usuario=fechaalta,categoria_usuario_id=categoria) 
-                datosusr.save()
-                usuarios = datos_usuarios_dj.objects.all()
-                return render_to_response('tablaUsuarios.html',{'usuarios': usuarios},RequestContext(request))
-            else:
-                return render_to_response('agregarUsuario.html',{'identPersonals':"True",'user': request.user},RequestContext(request))
-        return render_to_response('agregarUsuario.html',{'identPersonals':identPersonals,'user': request.user},RequestContext(request))
-    else:
-        return HttpResponseRedirect("/error403")
+
 
 @login_required()
 def mostrartablaNoPermitidoEventos(request): #Muestra tabla de aquellas tarjetas leidas que no tienen acceso

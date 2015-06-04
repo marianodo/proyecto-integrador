@@ -18,8 +18,14 @@
 <tr><td><i> Localidad: </td><td><input type="text" name="localidad" value={{formularios.localidad_usuario}}></i></td></tr><br>
 <tr><td><i> Email: </td><td><input type="text" name="email" value={{formularios.email_usuario}}></i></td></tr><br>
 <tr><td><i> Clave: </td><td><input type="text" name="clave" value={{formularios.clave_usuario}}></i></td></tr><br>
-<tr><td><i> Estado: </td><td><input type="text" name="estado" value={{formularios.estado_usuario}}></i></td></tr><br>
-<tr><td><i> Tarjeta: </td><td><input type="text" name="tarjeta" value={{formularios.tarjeta_usuario}}></i></td></tr><br>
+<tr><td>Estado</td><td>  <select name="estado">
+<option value="ACTIVO">ACTIVO</option>
+<option value="INACTIVO">INACTIVO</option>
+</td></tr><br>
+<tr><td>Tarjeta</td><td>  <select name="tarjeta">
+<option value="TARJETA">TARJETA</option>
+<option value="LLAVERO">LLAVERO</option>
+</td></tr><br>
 <tr><td><i> Categoria: </td><td><select id="cmbPersonal" name="categoria" style="background-color:#F2F2F2;color:#1C1C1C;">
    {% for identPersonal in identPersonals %} 
         {% if identPersonal.id == namePersonal.id %}

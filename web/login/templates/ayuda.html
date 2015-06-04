@@ -15,6 +15,8 @@
 <a href="#Categoria" style="margin-left:12%"><FONT SIZE=3> + Agregar categoria de usuarios</font></a><br><br>
 <a href="#Franjas" style="margin-left:12%"><FONT SIZE=3> + Agregar franjas horarias</font></a><br><br>
 <a href="#editarFranjas" style="margin-left:12%"><FONT SIZE=3> + Editar franjas horarias</font></a><br><br>
+<a href="#leds" style="margin-left:12%"><FONT SIZE=3> + LEDs de control</font></a><br><br>
+<a href="#ErrorMicrofono" style="margin-left:12%"><FONT SIZE=3> + Problemas con la opción "Llamar"</font></a><br><br>
 <a href="#Errores" style="margin-left:12%"><FONT SIZE=3> + Solución general a errores</font></a><br><br><br><br><br>
 <div class="panel panel-default">
   <div class="panel-heading"></div>
@@ -99,6 +101,22 @@ En primer lugar hay que dirigirse a la seccion <i>Ver eventos</i> <button type="
                  <span><span class="glyphicon glyphicon-chevron-down "></span></span>
     </button> en el extremo derecho de la barra de menu y luego hacer click en la opcion <i>Administrar Franjas Horarias</i>. En la nueva pantalla aparecera una tabla con las franjas horarias habilitadas para la categoría por defecto (es decir la primera en crearse en el sistema). Luego en la parte superior de la pagina hay que ubicarse en el casillero selector y seleccionar la categoría de usuario de la cual se desea editar la franja horaria y hacer click en el boton <button  style="background-color: #F2F2F2;color:#1C1C1C;" backgroundtype="submit" class="standar">Ver</button>. Una vez realizado dicho paso se debe ver la nueva tabla de franjas para la categoria seleccionada. Si se desea editar una franja horaria hay que dirigirse a la ultima columna de la tabla en la fila que se desea modificar y hacer click en el boton <i>Editar</i> lo cual permitira el redireccionamiento a una nueva pagina. Por ultimo se deben completar los nuevos datos que se desean para la franja horaria especificada (hora de inicio y hora de finalizacion) y hacer click en el boton <input type="submit" value="Editar"> para confirmar el proceso.<br><br> 
 <a href="#inicio"><FONT SIZE=3> Volver</font></a></center>
+
+
+<center><a name="leds" id="leds" > <FONT COLOR=black><h4><br><br><u>LEDs de control</u></h4></font></a><br>
+<FONT  FACE="arial" SIZE=3 COLOR=black  > En la caja que contiene la placa Raspberry Pi se encuentran 2 leds para controlar el estado del sistema. <br>
+- Si se visualiza solo el led BLANCO encendido el sistema se encontrará en un estado de correcto funcionamiento. <br>
+- Si el led AZUL se encuentra encendido se debe a que existe un problema en la red y el sistema no se puede comunicar con el Router.<br>
+- Si el led AZUL parpadea se debe a que existe un error en el sistema, el cuál provocó que el control de acceso deje de funcionar.<br><br>
+Cuando el sistema se este iniciando se mantendrá encendido el led AZUL con una luz tenue. Luego de terminar el proceso de booteo se encenderá el led BLANCO y se apagará el led AZUL avisando que el sistema se encuentra funcionando correctamente.
+<br><br> 
+<a href="#inicio"><FONT SIZE=3> Volver</font></a></center>
+
+
+<center><a name="ErrorMicrofono" id="ErrorMicrofono" > <FONT COLOR=black><h4><br><br><u>Problemas con la opcion "Llamar"</u></h4></font></a><br>
+<FONT  FACE="arial" SIZE=3 COLOR=black  > La Página Web necesita tener permisos para acceder al micrófono de la PC del administrador y así establecer la comunicación de voz con el usuario externo. Para poder habilitar el acceso al mismo es necesario elegir la opción "Permitir" luego de presionar el botón  <input type="submit" value="Llamar">. En caso de haber seleccionado la opción alternativa a "Permitir" el micrófono se bloqueará automáticamente y dejará de realizar la consulta en los próximos intentos de acceso a la funcionalidad de establecer la comunicación de voz. Para solucionar dicho problema hay que dirigirse a la configuración del Browser (Chrome o Firefox) y volver a habilitar la opción para permitir acceder al micrófono de la PC del administrador (Configuracion avanzada - Privacidad - Micrófono).<br><br> 
+<a href="#inicio"><FONT SIZE=3> Volver</font></a></center>
+
 
 <center><a name="Errores" id="Errores" > <FONT COLOR=black><h4><br><br><u>Solución general a errores</u></h4></font></a><br>
 <FONT  FACE="arial" SIZE=3 COLOR=black  > En el caso de que existan errores de cualquier naturaleza (y solo como ultima instancia) existe una opcion en el software de control web para reiniciar todo el sistema, y en pocos minutos se tendra el sistema funcionando de manera correcta nuevamente. Para ello es necesario dirigirse al boton <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">

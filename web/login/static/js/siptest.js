@@ -42,6 +42,7 @@
 // in the presented order. The first working server will be used for
 // the whole session.
 //
+
 var server = null;
 if(window.location.protocol === 'http:')
 	server = "http://" + window.location.hostname + ":8090/janus";
@@ -65,8 +66,11 @@ $(document).ready(function() {
 		// Use a button to start the demo
 
 		$('#start').click(function() {
-			if(started)
-				return;
+			//$.get("activeRelay",{status:"on"}, function(response){});
+			$.get("activeRelay/on",function(response){});
+			if(started){
+				
+				return;}
 			started = true;
 			$(this).attr('disabled', true).unbind('click');
 			// Make sure the browser supports WebRTC
@@ -92,11 +96,14 @@ $(document).ready(function() {
 									$('#login').removeClass('hide').show();
 									registerUsername();
 									$('#server').focus();
+
 									$('#start').removeAttr('disabled').html("Stop")
+									
 										.click(function() {
 											$(this).attr('disabled', true);
 											janus.destroy();
 										});
+
 									$('#guest').change(function() {
 										if($('#guest').length && $('#guest:checked').val() !== undefined) {
 											//~ $('#username').empty().attr('disabled', true);
@@ -222,6 +229,7 @@ $(document).ready(function() {
 												}
 											});											
 										} else if(event === 'accepted') {
+
 											console.log(result["username"] + " accepted the call!");
 											// TODO Video call can start
 											if(jsep !== null && jsep !== undefined) {
@@ -230,7 +238,10 @@ $(document).ready(function() {
 											$('#call').removeAttr('disabled').html('Hangup')
 												.removeClass("btn-success").addClass("btn-danger")
 												.unbind('click').click(doHangup);
+												
+												
 										} else if(event === 'hangup') {
+
 											if(incoming != null) {
 												incoming.modal('hide');
 												incoming = null;
@@ -304,6 +315,7 @@ $(document).ready(function() {
 						});
 					},
 					destroyed: function() {
+						$.get("activeRelay/off",function(response){});
 						window.location.reload();
 					}
 				});

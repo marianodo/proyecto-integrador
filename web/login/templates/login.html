@@ -1,15 +1,26 @@
 {% extends "base.html" %}
 
         {% block contento %}
-
+<script language="Javascript">
+function cartel() {
+    alert("Usuario o contraseña incorrectos. Por favor vuelva a intentar")
+    
+}
+</script>
     {% if user.is_active %}
+       
         <script language="JavaScript" type="text/javascript">
 
             window.location="/home";
 
         </script>
-    {% endif %}
 
+    {% endif %}
+            {% if form.errors %}
+                <script>
+                    cartel();
+                </script>
+            {% endif %}
             <form class="navbar-form navbar-right" action="{% url 'django.contrib.auth.views.login' %}" method="post" accept-charset="utf-8">
                  {% csrf_token %}
                 <div class="form-group">
