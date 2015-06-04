@@ -38,7 +38,7 @@ import mimetypes
 
 GPIO.setmode(GPIO.BOARD) ## Use board pin numbering
 GPIO.setup(3, GPIO.OUT) #
-
+GPIO.setup(11, GPIO.OUT) #
 
 @login_required()
 def home(request): #Vuelve al home, pasamos Flag false ya que no existe llamada en curso
@@ -48,6 +48,15 @@ def home(request): #Vuelve al home, pasamos Flag false ya que no existe llamada 
 def mostrarTablaUsuarios(request):
     usuarios = datos_usuarios_dj.objects.all() #Trae todos los usuarios
     return render_to_response('tablaUsuarios.html',{'usuarios': usuarios })
+
+@login_required()
+def activeRelay(request,status):
+
+    if status == "on":
+        GPIO.output(11,True) #Abro puerta
+    else:
+        GPIO.output(11,False)
+    return HttpResponse('')
 
 @login_required()
 def openDoor(request):
