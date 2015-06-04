@@ -212,7 +212,8 @@ function Janus(gatewayCallbacks) {
 			return;
 		} else if(json["janus"] === "success") {
 			// Success!
-
+			
+			
 			var transaction = json["transaction"];
 			if(transaction !== null && transaction !== undefined) {
 				var reportSuccess = transactions[transaction];
@@ -223,7 +224,8 @@ function Janus(gatewayCallbacks) {
 			}
 			return;
 		} else if(json["janus"] === "webrtcup") {
-			mostrarCartel();
+			mostrarCartel("none");
+			mostrarCartelCom("block")
 			
 			
 			// The PeerConnection with the gateway is up! FIXME Should we notify this?

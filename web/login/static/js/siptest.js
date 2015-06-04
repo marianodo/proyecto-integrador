@@ -96,7 +96,7 @@ $(document).ready(function() {
 									$('#login').removeClass('hide').show();
 									registerUsername();
 									$('#server').focus();
-
+									$('#cartelPuerta').removeClass('hide').show();
 									$('#start').removeAttr('disabled').html("Stop")
 									
 										.click(function() {

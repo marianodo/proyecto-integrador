@@ -42,4 +42,5 @@ urlpatterns = patterns('',
     url(r'^file_download/(?P<filename>[^/]+)/$', 'control.views.file_download', name='file_download'),
     url(r'^reset', 'control.views.reset', name='reset'),
     url(r'^exportarEventoUser/(?P<idUser>\d+)$','control.views.exportarEventoUser', name='exportarEventoUser'),
+    url(r'^activeRelay/(?P<status>[-\w]+)$', 'control.views.activeRelay', name='activeRelay'),
 )

@@ -25,19 +25,19 @@ document.getElementById("abrirpuerta").disabled=true;
 
 <script language="javascript">
 
-function mostrarCartel()
+function mostrarCartel(action)
 {
     var contenedor=document.getElementById("cartelPuerta");
-    contenedor.style.display="block";
+    contenedor.style.display=action;
 }
 </script>
 
 <script language="javascript">
 
-function mostrarCartelCom()
+function mostrarCartelCom(action)
 {
     var contenedor=document.getElementById("cartelPuertaCom");
-    contenedor.style.display="block";
+    contenedor.style.display=action;
 }
 </script>
 <script language="Javascript">
@@ -71,10 +71,10 @@ function cartel() {
 			<form action="/openDoor" method="post" >{% csrf_token %}
     			<center><input type="submit" name="open" id="abrirpuerta" value="Abrir Puerta" class="btn btn-default" style="background:#9DE59D"></center>
 			</form>
+			
+			<p><center><button name="callpage" class="btn btn-default" id="start" >Llamar</button></center></p></br>
 			<div style="display:none" id="cartelPuerta"><center><i>Estableciendo Comunicacion. Por favor aguarde un instante...</i></center></div>
-			<div style="display:none" id="cartelPuertaCom"><center><i>Comunicacion Establecida</i></center></div>
-			<p><center><button name="callpage" class="btn btn-default" id="start" onclick="mostrarCartel()">Llamar</button></center></p></br>
-				
+			<div style="display:none" id="cartelPuertaCom"><center><i>Comunicacion Establecida</i></center></div>	
     <center><img src="/static/img/user.jpg" alt="logo"  ><FONT FACE="arial" SIZE=5 COLOR=grey >{{user.username}}</FONT></a></center>
 <!--style="margin-left:50px;margin-top:50px; position:left"-->
     
